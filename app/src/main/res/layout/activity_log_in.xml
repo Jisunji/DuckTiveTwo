@@ -35,7 +35,7 @@
 
 
     <EditText
-        android:id="@+id/txtEnterEmail"
+        android:id="@+id/login_uname"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginStart="44dp"
@@ -45,15 +45,14 @@
         android:background="@drawable/edit_text_background"
         android:ems="10"
         android:gravity="center"
-        android:hint="Enter your Email"
+        android:hint="Enter your username"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toTopOf="@+id/txtEnterPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lblWelcomeBack" />
-
     <EditText
-        android:id="@+id/txtEnterPassword"
+        android:id="@+id/login_password"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginStart="44dp"
@@ -70,7 +69,7 @@
         app:layout_constraintTop_toBottomOf="@+id/lblWelcomeBack" />
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/cbAgree"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="58dp"
@@ -96,7 +95,7 @@
         android:text="Forget Password?"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/checkBox"
+        app:layout_constraintStart_toEndOf="@+id/cbAgree"
         app:layout_constraintTop_toBottomOf="@+id/txtEnterPassword" />
 
     <TextView
@@ -126,7 +125,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+        app:layout_constraintTop_toBottomOf="@+id/cbAgree" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

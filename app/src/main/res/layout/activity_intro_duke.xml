@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".IntroDuke">
 
-    <pl.droidsonroids.gif.GifImageView
-        android:id="@+id/gifImageView"
+    <pl.droidsonroids.gif.GifImageButton
+        android:id="@+id/jason"
         android:layout_width="403dp"
         android:layout_height="412dp"
         android:layout_marginStart="11dp"
@@ -30,7 +30,7 @@
         android:fontFamily="sans-serif-black"
         android:gravity="center"
         android:text="HI! \n Please pet me!"
-        android:textSize="36dp"
+        android:textSize="36sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -8,7 +8,7 @@
     tools:context=".SignUp">
 
     <EditText
-        android:id="@+id/txtValidEmail5"
+        android:id="@+id/signup_email"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginStart="44dp"
@@ -20,10 +20,10 @@
         android:gravity="center"
         android:hint="Valid Email"
         android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toTopOf="@+id/txtPhoneNo"
+        app:layout_constraintBottom_toTopOf="@+id/signup_no"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtEnterEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/signup_name" />
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/gifImageView"
@@ -54,7 +54,7 @@
         app:layout_constraintTop_toBottomOf="@+id/gifImageView" />
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/cbAgree"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="104dp"
@@ -95,7 +95,7 @@
         app:layout_constraintVertical_bias="0.51" />
 
     <EditText
-        android:id="@+id/txtEnterEmail"
+        android:id="@+id/signup_name"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginStart="44dp"
@@ -105,15 +105,15 @@
         android:background="@drawable/edit_text_background"
         android:ems="10"
         android:gravity="center"
-        android:hint="Full Name"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/txtValidEmail5"
+        android:hint="Username"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/signup_email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lblWelcomeBack" />
 
     <EditText
-        android:id="@+id/txtPhoneNo"
+        android:id="@+id/signup_no"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginStart="44dp"
@@ -125,13 +125,13 @@
         android:gravity="center"
         android:hint="Phone Number"
         android:inputType="text|phone"
-        app:layout_constraintBottom_toTopOf="@+id/txtStrongPass"
+        app:layout_constraintBottom_toTopOf="@+id/signup_pass"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtValidEmail5" />
+        app:layout_constraintTop_toBottomOf="@+id/signup_email" />
 
     <EditText
-        android:id="@+id/txtStrongPass"
+        android:id="@+id/signup_pass"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginStart="44dp"
@@ -143,8 +143,8 @@
         android:gravity="center"
         android:hint="Password"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/checkBox"
+        app:layout_constraintBottom_toTopOf="@+id/cbAgree"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPhoneNo" />
+        app:layout_constraintTop_toBottomOf="@+id/signup_no" />
 </androidx.constraintlayout.widget.ConstraintLayout>

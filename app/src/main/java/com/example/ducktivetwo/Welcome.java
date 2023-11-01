@@ -18,7 +18,8 @@ public class Welcome extends AppCompatActivity {
         _btnStart = (Button) findViewById(R.id.btnStart);
         _btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 openIntro();
             }
         });

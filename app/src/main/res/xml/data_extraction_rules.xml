@@ -6,6 +6,22 @@
 <data-extraction-rules>
     <cloud-backup>
         <!-- TODO: Use <include> and <exclude> to control what is backed up.
+
+        TODO: Arrange each main function by color.
+        TODO: Bottom Navigation Bar (HOME, TASK, HABITS, EXPENSE)
+        TODO: NAVIGATION DRAWER (HOME, DUCK PROFILE, REPORTS, NOTIFICATIONS, LOG OUT)
+
+
+        TODO: TASKS TODAY
+        TODO: NAVIGATION DRAWER (DONE)
+        TODO: NAVIGATION BAR (DONE)
+        TODO: LOG IN/SIGN UP WITH FIREBASE (DONE)
+
+
+        TODO: TASKS TOMORROW
+        TODO: MAIN MENU UI ()
+        TODO: SPLASH MOTION (LOADING SCREEN) - HINDI PA SURE
+        TODO:
         <include .../>
         <exclude .../>
         -->
