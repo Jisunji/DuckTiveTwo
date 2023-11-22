@@ -12,12 +12,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DuckTiveTwo"
         tools:targetApi="31">
-
-        <activity android:name=".Splashscreen"
+        <activity
+            android:name=".ExpenseFragment11"
+            android:exported="false" />
+        <activity
+            android:name=".AddTransactionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SplashScreen"
+            android:exported="false" />
+        <activity
+            android:name="fragments.ExpenseFragment"
+            android:exported="false" />
+        <activity
+            android:name="fragments.Splashscreen"
             android:exported="true"
-            android:theme="@style/Splashscreen">
-
-        </activity>
+            android:theme="@style/Splashscreen" />
         <activity
             android:name=".MainActivity2"
             android:exported="false" />

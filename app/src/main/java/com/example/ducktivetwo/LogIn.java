@@ -12,6 +12,7 @@ import android.text.Spanned;
 import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -19,6 +20,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,8 +37,8 @@ import java.util.Objects;
 
 public class LogIn extends AppCompatActivity {
 
-    private Button btnLogin2;
-    private EditText loginUsername, loginPassword;
+    private EditText loginEmail, loginPassword;
+    private FirebaseAuth auth;
 
 
     @SuppressLint("MissingInflatedId")
@@ -42,23 +47,45 @@ public class LogIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
 
+        auth = FirebaseAuth.getInstance();
         TextView forgetPass;
         forgetPass = findViewById(R.id.txtClickable2);
-        loginUsername = findViewById(R.id.login_uname);
+        loginEmail = findViewById(R.id.login_email);
         loginPassword = findViewById(R.id.login_password);
-        btnLogin2 = (Button) findViewById(R.id.btnLogin2);
+        Button btnLogin2 = (Button) findViewById(R.id.btnLogin2);
         String text = "Forget Password?";
 
         btnLogin2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!validateUsername() || !validatePassword()){
+                String email = loginEmail.getText().toString().trim();
+                String password = loginPassword.getText().toString().trim();
 
-                } else{
-                    checkUser();
+                if(!email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                    if(!password.isEmpty()){
+                    auth.signInWithEmailAndPassword(email, password)
+                            .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                                @Override
+                                public void onSuccess(AuthResult authResult) {
+                                    Toast.makeText(LogIn.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(LogIn.this, Welcome.class));
+                                    finish();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(LogIn.this, "Login Failed", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                }else{
+                    loginPassword.setError("Required field...");
                 }
+            }else if(email.isEmpty()){
+                loginEmail.setError("Required field...");
+            }else{
+                loginEmail.setError("Please enter a valid email");
             }
-        });
+        }});
 
 
         SpannableString ss = new SpannableString(text);
@@ -107,71 +134,6 @@ public class LogIn extends AppCompatActivity {
         RegisterHere.setText(ss1);
         RegisterHere.setMovementMethod(LinkMovementMethod.getInstance());
 
-    }
-
-    public Boolean validateUsername() {
-        String val = loginUsername.getText().toString();
-        if (val.isEmpty()) {
-            loginUsername.setError("Username cannot be empty");
-            return false;
-        } else {
-            loginUsername.setError(null);
-            return true;
-        }
-    }
-    public Boolean validatePassword(){
-        String val = loginPassword.getText().toString();
-        if (val.isEmpty()) {
-            loginPassword.setError("Password cannot be empty");
-            return false;
-        } else {
-            loginPassword.setError(null);
-            return true;
-        }
-    }
-    public void checkUser(){
-        String userUsername = loginUsername.getText().toString().trim();
-        String userPassword = loginPassword.getText().toString().trim();
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-        Query checkUserDatabase = reference.orderByChild("username").equalTo(userUsername);
-        checkUserDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
-                    loginUsername.setError(null);
-                    String passwordFromDB = snapshot.child(userUsername).child("password").getValue(String.class);
-                    if (passwordFromDB.equals(userPassword)) {
-                        loginUsername.setError(null);
-                        String usernameFromDB = snapshot.child(userUsername).child("username").getValue(String.class);
-                        String emailFromDB = snapshot.child(userUsername).child("email").getValue(String.class);
-                        String phoneFromDB = snapshot.child(userUsername).child("phone").getValue(String.class);
-                        Intent intent = new Intent(LogIn.this, Welcome.class);
-                        intent.putExtra("username", usernameFromDB);
-                        intent.putExtra("email", emailFromDB);
-                        intent.putExtra("phone", phoneFromDB);
-                        intent.putExtra("password", passwordFromDB);
-                        startActivity(intent);
-                    } else {
-                        loginPassword.setError("Invalid Credentials");
-                        loginPassword.requestFocus();
-                    }
-                } else {
-                    loginUsername.setError("User does not exist");
-                    loginUsername.requestFocus();
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-    }
-
-
-
-
-    public void openWelcome() {
-        Intent intent3 = new Intent(this, Welcome.class);
-        startActivity(intent3);
     }
     public void openSignUp(){
         Intent intent = new Intent(this, SignUp.class);

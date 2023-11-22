@@ -1,5 +1,6 @@
 package com.example.ducktivetwo;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -18,9 +19,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Objects;
 
 
 public class SignUp extends AppCompatActivity {
@@ -30,10 +36,13 @@ public class SignUp extends AppCompatActivity {
     EditText signupUname, signupEmail,signupPassword, signupPhone;
     FirebaseDatabase database;
     DatabaseReference reference;
+    private FirebaseAuth auth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+
+        auth = FirebaseAuth.getInstance();
 
         textView = findViewById(R.id.txtClickable);
         btnReg = findViewById(R.id.btnRegister);
@@ -60,16 +69,37 @@ public class SignUp extends AppCompatActivity {
                 database = FirebaseDatabase.getInstance();
                 reference = database.getReference("users");
 
-                String username = signupUname.getText().toString();
-                String email = signupEmail.getText().toString();
-                String password = signupPassword.getText().toString();
-                String phone = signupPhone.getText().toString();
+                String username = signupUname.getText().toString().trim();
+                String email = signupEmail.getText().toString().trim();
+                String password = signupPassword.getText().toString().trim();
+                String phone = signupPhone.getText().toString().trim();
 
+                if(username.isEmpty()){
+                    signupUname.setError("Required field...");
+                }
+                if(email.isEmpty()){
+                    signupEmail.setError("Required field...");
+                }
+                if(password.isEmpty()){
+                    signupPassword.setError("Required field...");
+                }
+                if(phone.isEmpty()){
+                    signupPhone.setError("Required field...");
+                }else{
+                    auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful()){
+                                Toast.makeText(SignUp.this, "Sign Up Successful", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(SignUp.this, LogIn.class));
+                            }else{
+                                Toast.makeText(SignUp.this, "Sign Up Failed" + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
                 HelperClass helperClass = new HelperClass(username, email, phone, password);
                 reference.child(username).setValue(helperClass);
-
-                Toast.makeText(SignUp.this, "Register Successful", Toast.LENGTH_SHORT).show();
-                openLogIn();
             }
         });
 

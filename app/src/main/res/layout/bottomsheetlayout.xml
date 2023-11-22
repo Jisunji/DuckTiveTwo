@@ -56,7 +56,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Upload a video"
+            android:text="Add a habit"
             android:textColor="@color/lavender"
             android:layout_marginLeft="30dp"
             android:textSize="16sp"/>
@@ -72,14 +72,16 @@
 
 
         <ImageView
+            android:clickable="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_whatshot_24"/>
 
         <TextView
+            android:clickable="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Create a short"
+            android:text="Add an expense"
             android:textColor="@color/lavender"
             android:layout_marginLeft="30dp"
             android:textSize="16sp"/>
@@ -105,10 +107,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Go live"
+            android:text="Add a task"
             android:textColor="@color/lavender"
             android:layout_marginLeft="30dp"
             android:textSize="16sp"/>
+
+
 
     </LinearLayout>
 

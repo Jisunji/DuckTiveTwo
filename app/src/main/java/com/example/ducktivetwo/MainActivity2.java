@@ -1,6 +1,5 @@
 package com.example.ducktivetwo;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -12,11 +11,11 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -29,6 +28,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import com.google.android.material.navigation.NavigationView;
 
+import fragments.ExpenseFragment;
+import fragments.HabitsFragment;
+import fragments.HomeFragment;
+import fragments.TasksFragment;
 
 
 public class MainActivity2 extends AppCompatActivity {
@@ -72,11 +75,11 @@ public class MainActivity2 extends AppCompatActivity {
             if (itemId == R.id.home) {
                 replaceFragment(new HomeFragment());
             } else if (itemId == R.id.shorts) {
-                replaceFragment(new ShortsFragment());
+                replaceFragment(new TasksFragment());
             } else if (itemId == R.id.subscriptions) {
-                replaceFragment(new SubscriptionsFragment());
+                replaceFragment(new HabitsFragment());
             } else if (itemId == R.id.library) {
-                replaceFragment(new LibraryFragment());
+                replaceFragment(new ExpenseFragment());
             }
             else if (itemId == R.id.nav_home) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new HomeFragment()).commit();
@@ -92,7 +95,7 @@ public class MainActivity2 extends AppCompatActivity {
             drawerLayout.closeDrawer(GravityCompat.START);
             return true;
         });
-        additem.setOnClickListener(v -> showBottomDialog());
+        //additem.setOnClickListener(v -> showBottomDialog());
 
     }
 
@@ -105,6 +108,7 @@ public class MainActivity2 extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
+    /**
     private void showBottomDialog() {
 
         final Dialog dialog = new Dialog(this);
@@ -131,10 +135,14 @@ public class MainActivity2 extends AppCompatActivity {
             public void onClick(View v) {
 
                 dialog.dismiss();
-                Toast.makeText(MainActivity2.this,"Create a short is Clicked",Toast.LENGTH_SHORT).show();
+
+
+                Toast.makeText(MainActivity2.this,"Add Expense",Toast.LENGTH_SHORT).show();
 
             }
         });
+
+
         liveLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -160,6 +168,7 @@ public class MainActivity2 extends AppCompatActivity {
 
 
     }
+     */
 
 
     }

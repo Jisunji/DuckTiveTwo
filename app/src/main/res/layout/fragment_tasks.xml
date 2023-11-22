@@ -6,20 +6,15 @@
     android:orientation="vertical"
     android:layout_gravity="center"
     android:background="@color/lavender"
-    tools:context="fragments.HomeFragment">
+    tools:context="fragments.TasksFragment">
+
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <TextView
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:textSize="20dp"
-            android:textColor="@color/black"
-            android:layout_height="wrap_content"
-            android:text="Share Fragment"/>
+
+
 
         <TextView
             android:layout_marginTop="10dp"
@@ -113,32 +108,9 @@
             android:layout_gravity="center"
             android:src="@drawable/duckduck"/>
 
-        <com.google.android.material.tabs.TabLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Monday" />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tuesday" />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Wednesday" />
-        </com.google.android.material.tabs.TabLayout>
 
 
     </LinearLayout>
-
-
-
-
-
 
 </ScrollView>

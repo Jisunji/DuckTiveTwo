@@ -3,27 +3,24 @@
 
     <item
         android:id="@+id/home"
-        android:title="Home"
+        android:title="Dashboard"
         android:icon="@drawable/ic_baseline_home_24"/>
 
     <item
         android:id="@+id/shorts"
-        android:title="Shorts"
+        android:title="Tasks"
         android:icon="@drawable/ic_baseline_whatshot_24"/>
 
-    <item
-        android:id="@+id/fab"
-        android:title=""
-        android:enabled="false"/>
+
 
     <item
         android:id="@+id/subscriptions"
-        android:title="Subscriptions"
+        android:title="Habits"
         android:icon="@drawable/ic_baseline_subscriptions_24"/>
 
     <item
         android:id="@+id/library"
-        android:title="Library"
+        android:title="Expense"
         android:icon="@drawable/ic_baseline_video_library_24"/>
 
 </menu>

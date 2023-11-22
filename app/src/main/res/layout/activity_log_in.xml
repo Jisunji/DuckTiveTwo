@@ -35,19 +35,18 @@
 
 
     <EditText
-        android:id="@+id/login_uname"
+        android:id="@+id/login_email"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginStart="44dp"
         android:layout_marginTop="41dp"
         android:layout_marginEnd="48dp"
-        android:layout_marginBottom="25dp"
         android:background="@drawable/edit_text_background"
         android:ems="10"
         android:gravity="center"
-        android:hint="Enter your username"
+        android:hint="Enter your email"
         android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toTopOf="@+id/txtEnterPassword"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lblWelcomeBack" />
@@ -81,7 +80,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtEnterPassword"
+
         tools:ignore="TextSizeCheck" />
 
     <TextView
@@ -96,7 +95,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/cbAgree"
-        app:layout_constraintTop_toBottomOf="@+id/txtEnterPassword" />
+         />
 
     <TextView
         android:id="@+id/txtRegHere"
