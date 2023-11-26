@@ -1,35 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Welcome">
+    tools:context=".Welcome"
+    android:background="@drawable/gradient_with_blur">
 
     <TextView
         android:id="@+id/lblSettled"
         android:layout_width="327dp"
-        android:layout_height="371dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="41dp"
-        android:layout_marginTop="360dp"
-        android:layout_marginEnd="41dp"
-        android:layout_marginBottom="172dp"
-        android:fontFamily="sans-serif-black"
-        android:gravity="center"
-        android:text="You are all settled! Lets get started!\n \n Task Management Tool"
-        android:textSize="38dp"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="120dp"
+    android:layout_marginEnd="41dp"
+    android:fontFamily="sans-serif-black"
+    android:gravity="center"
+    android:text="You are all settled! Lets get started!\n \n Task Management Tool"
+    android:textSize="38dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonStart"
         android:layout_width="150dp"
         android:layout_height="74dp"
         android:text="Let's Start"
         android:textSize="20dp"
-        tools:layout_editor_absoluteX="130dp"
-        tools:layout_editor_absoluteY="609dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblSettled"
+        android:layout_marginTop="16dp" />
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
