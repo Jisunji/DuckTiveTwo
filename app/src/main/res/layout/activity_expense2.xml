@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent"
+                                                   android:background="@drawable/gradient_with_blur">
+
+
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:id="@+id/constraintLayout2"
+		android:layout_width="413dp"
+		android:layout_height="58dp"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent">
+
+
+		<Toolbar
+			android:id="@+id/toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="?attr/actionBarSize"
+			android:background="#F5BB66"
+			app:elevation="0dp"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:title="My Toolbar"
+			app:titleTextColor="@android:color/white"
+			tools:ignore="MissingConstraints" />
+
+		<ImageView
+			android:id="@+id/imageView16"
+			android:layout_width="51dp"
+			android:layout_height="44dp"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="@+id/toolbar"
+			app:srcCompat="@drawable/duckblack" />
+
+
+		<ImageView
+			android:id="@+id/imageView12"
+			android:layout_width="18dp"
+			android:layout_height="17dp"
+			android:layout_marginStart="37dp"
+			android:layout_marginBottom="29dp"
+			app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+			app:layout_constraintStart_toStartOf="@+id/toolbar"
+			app:srcCompat="@drawable/home"
+			tools:ignore="MissingConstraints" />
+
+		<TextView
+			android:id="@+id/toolbarText"
+			android:layout_width="60dp"
+			android:layout_height="8dp"
+			android:layout_gravity="center"
+			android:layout_marginStart="16dp"
+			android:layout_marginBottom="16dp"
+			android:gravity="center"
+			android:text="Dashboard"
+			android:textColor="@android:color/black"
+			android:textSize="18px"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintStart_toStartOf="parent" />
+
+		<ImageView
+			android:id="@+id/imageView15"
+			android:layout_width="16dp"
+			android:layout_height="16dp"
+			android:layout_marginBottom="4dp"
+			app:layout_constraintBottom_toTopOf="@+id/textView13"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintHorizontal_bias="0.275"
+			app:layout_constraintStart_toStartOf="parent"
+			app:srcCompat="@drawable/moon" />
+
+		<TextView
+			android:id="@+id/textView13"
+			android:layout_width="38dp"
+			android:layout_height="9dp"
+			android:layout_marginStart="22dp"
+			android:layout_marginBottom="16dp"
+			android:gravity="center"
+			android:text="Tasks"
+			android:textSize="18px"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintStart_toEndOf="@+id/toolbarText" />
+
+
+		<TextView
+			android:id="@+id/textView14"
+			android:layout_width="53dp"
+			android:layout_height="13dp"
+			android:layout_marginEnd="13dp"
+			android:layout_marginBottom="16dp"
+			android:gravity="center"
+			android:text="Habits"
+			android:textSize="18px"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toStartOf="@+id/textView15" />
+
+		<ImageView
+			android:id="@+id/imageView17"
+			android:layout_width="15dp"
+			android:layout_height="16dp"
+			android:layout_marginStart="114dp"
+			android:layout_marginBottom="3dp"
+			app:layout_constraintBottom_toTopOf="@+id/textView14"
+			app:layout_constraintStart_toStartOf="@+id/imageView16"
+			app:srcCompat="@drawable/habituals" />
+
+		<TextView
+			android:id="@+id/textView15"
+			android:layout_width="44dp"
+			android:layout_height="12dp"
+			android:layout_marginEnd="28dp"
+			android:layout_marginBottom="16dp"
+			android:gravity="center"
+			android:text="Expense"
+			android:textSize="18px"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent" />
+
+		<ImageView
+			android:id="@+id/imageView18"
+			android:layout_width="15dp"
+			android:layout_height="16dp"
+			android:layout_marginEnd="44dp"
+			android:layout_marginBottom="32dp"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:srcCompat="@drawable/expense" />
+
+
+	</androidx.constraintlayout.widget.ConstraintLayout>
+
+	<RelativeLayout
+		android:id="@+id/groupedContainer2"
+		android:layout_width="348dp"
+		android:layout_height="260dp"
+		android:layout_margin="16dp"
+		app:layout_constraintBottom_toTopOf="@+id/textView35"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		tools:ignore="MissingConstraints">
+
+
+		<ImageView
+			android:id="@+id/rectangleBackground2"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:background="#F5BB66"
+			android:scaleType="fitXY" />
+
+		<TextView
+			android:id="@+id/textView40"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentStart="true"
+			android:layout_alignParentTop="true"
+			android:layout_marginStart="20dp"
+			android:layout_marginTop="14dp"
+			android:text="Interval Spending Summary  " />
+
+		<Spinner
+			android:id="@+id/spinner3"
+			android:layout_width="112dp"
+			android:layout_height="31dp"
+			android:layout_alignParentTop="true"
+			android:layout_alignParentEnd="true"
+			android:layout_marginTop="26dp"
+			android:layout_marginEnd="24dp" />
+
+		<ListView
+			android:layout_width="134dp"
+			android:layout_height="144dp"
+			android:layout_alignParentStart="true"
+			android:layout_alignParentTop="true"
+			android:layout_marginStart="29dp"
+			android:layout_marginTop="76dp" />
+
+		<ListView
+			android:layout_width="134dp"
+			android:layout_height="144dp"
+			android:layout_alignParentStart="true"
+			android:layout_alignParentTop="true"
+			android:layout_marginStart="191dp"
+			android:layout_marginTop="78dp" />
+
+	</RelativeLayout>
+
+	<TextView
+		android:id="@+id/textView35"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="200dp"
+		android:text="Expenses  of selected month"
+		android:textColor="@color/white"
+		android:textSize="60px"
+		android:textStyle="bold|italic"
+		app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent" />
+
+	<com.github.mikephil.charting.charts.BarChart
+		android:id="@+id/barChart"
+		android:layout_width="297dp"
+		android:layout_height="124dp"
+		app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/textView35" />
+
+	<TextView
+		android:id="@+id/textView30"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="16dp"
+		android:layout_marginTop="24dp"
+		android:text="DuckTiveTwo"
+		android:textColor="@color/white"
+		android:textSize="60px"
+		android:textStyle="bold|italic"
+		app:layout_constraintStart_toEndOf="@+id/imageView26"
+		app:layout_constraintTop_toTopOf="parent" />
+
+	<ImageView
+		android:id="@+id/imageView27"
+		android:layout_width="37dp"
+		android:layout_height="18dp"
+		android:layout_marginTop="16dp"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintHorizontal_bias="0.922"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent"
+		app:srcCompat="@drawable/bell" />
+
+	<ImageView
+		android:id="@+id/imageView26"
+		android:layout_width="63dp"
+		android:layout_height="54dp"
+		android:layout_marginStart="16dp"
+		android:layout_marginTop="16dp"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent"
+		app:srcCompat="@drawable/burgerreal" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

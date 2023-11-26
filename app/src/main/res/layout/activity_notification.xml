@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+ android:layout_width="match_parent"
+android:background="@drawable/gradient_with_blur"
+android:layout_height="match_parent">
+
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:id="@+id/constraintLayout2"
+		android:layout_width="413dp"
+		android:layout_height="58dp"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent">
+
+
+		<Toolbar
+			android:id="@+id/toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="?attr/actionBarSize"
+			android:background="#F5BB66"
+			app:elevation="0dp"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:title="My Toolbar"
+			app:titleTextColor="@android:color/white"
+			tools:ignore="MissingConstraints" />
+
+		<ImageView
+			android:id="@+id/imageView16"
+			android:layout_width="51dp"
+			android:layout_height="44dp"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="@+id/toolbar"
+			app:srcCompat="@drawable/duckblack" />
+
+
+		<ImageView
+			android:id="@+id/imageView12"
+			android:layout_width="18dp"
+			android:layout_height="17dp"
+			android:layout_marginStart="37dp"
+			android:layout_marginBottom="29dp"
+			app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+			app:layout_constraintStart_toStartOf="@+id/toolbar"
+			app:srcCompat="@drawable/home"
+			tools:ignore="MissingConstraints" />
+
+		<TextView
+			android:id="@+id/toolbarText"
+			android:layout_width="60dp"
+			android:layout_height="8dp"
+			android:layout_gravity="center"
+			android:layout_marginStart="16dp"
+			android:layout_marginBottom="16dp"
+			android:gravity="center"
+			android:text="Dashboard"
+			android:textColor="@android:color/black"
+			android:textSize="18px"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintStart_toStartOf="parent" />
+
+		<ImageView
+			android:id="@+id/imageView15"
+			android:layout_width="16dp"
+			android:layout_height="16dp"
+			android:layout_marginBottom="4dp"
+			app:layout_constraintBottom_toTopOf="@+id/textView13"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintHorizontal_bias="0.275"
+			app:layout_constraintStart_toStartOf="parent"
+			app:srcCompat="@drawable/moon" />
+
+		<TextView
+			android:id="@+id/textView13"
+			android:layout_width="38dp"
+			android:layout_height="9dp"
+			android:layout_marginStart="22dp"
+			android:layout_marginBottom="16dp"
+			android:gravity="center"
+			android:text="Tasks"
+			android:textSize="18px"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintStart_toEndOf="@+id/toolbarText" />
+
+
+		<TextView
+			android:id="@+id/textView14"
+			android:layout_width="53dp"
+			android:layout_height="13dp"
+			android:layout_marginEnd="13dp"
+			android:layout_marginBottom="16dp"
+			android:gravity="center"
+			android:text="Habits"
+			android:textSize="18px"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toStartOf="@+id/textView15" />
+
+		<ImageView
+			android:id="@+id/imageView17"
+			android:layout_width="15dp"
+			android:layout_height="16dp"
+			android:layout_marginStart="114dp"
+			android:layout_marginBottom="3dp"
+			app:layout_constraintBottom_toTopOf="@+id/textView14"
+			app:layout_constraintStart_toStartOf="@+id/imageView16"
+			app:srcCompat="@drawable/habituals" />
+
+		<TextView
+			android:id="@+id/textView15"
+			android:layout_width="44dp"
+			android:layout_height="12dp"
+			android:layout_marginEnd="28dp"
+			android:layout_marginBottom="16dp"
+			android:gravity="center"
+			android:text="Expense"
+			android:textSize="18px"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent" />
+
+		<ImageView
+			android:id="@+id/imageView18"
+			android:layout_width="15dp"
+			android:layout_height="16dp"
+			android:layout_marginEnd="44dp"
+			android:layout_marginBottom="32dp"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:srcCompat="@drawable/expense" />
+
+
+	</androidx.constraintlayout.widget.ConstraintLayout>
+
+	<ImageView
+		android:id="@+id/imageView5"
+		android:layout_width="63dp"
+		android:layout_height="54dp"
+		android:layout_marginStart="16dp"
+		android:layout_marginTop="16dp"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent"
+		app:srcCompat="@drawable/burgerreal" />
+
+
+	<ImageView
+    android:id="@+id/imageView21"
+    android:layout_width="37dp"
+    android:layout_height="18dp"
+    android:layout_marginTop="16dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.922"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:srcCompat="@drawable/bell" />
+
+	<Button
+		android:id="@+id/button"
+		android:layout_width="wrap_content"
+		android:layout_height="33dp"
+		android:layout_alignParentStart="true"
+		android:layout_alignParentBottom="true"
+		android:layout_marginEnd="21dp"
+		android:layout_marginBottom="24dp"
+		android:background="@drawable/mybutton"
+		android:text="Save"
+		android:textSize="30px"
+		app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
+		app:layout_constraintEnd_toEndOf="parent" />
+
+	<TextView
+		android:id="@+id/textView20"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="Notification"
+		android:textColor="@color/white"
+		android:textSize="80px"
+		android:textStyle="italic"
+		app:layout_constraintBottom_toTopOf="@+id/textView26"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintHorizontal_bias="0.208"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+	<TextView
+		android:id="@+id/textView26"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="60dp"
+		android:layout_marginBottom="3dp"
+		android:text="Tasks"
+		android:textColor="@color/white"
+		android:textSize="60px"
+		android:textStyle="italic"
+		app:layout_constraintBottom_toTopOf="@+id/radioButton"
+		app:layout_constraintStart_toStartOf="parent" />
+
+	<RadioButton
+		android:id="@+id/radioButton"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="53dp"
+		android:layout_marginBottom="10dp"
+		android:text="RadioButton"
+		app:layout_constraintBottom_toTopOf="@+id/radioButton2"
+		app:layout_constraintStart_toStartOf="parent" />
+
+	<RadioButton
+		android:id="@+id/radioButton2"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="54dp"
+		android:layout_marginBottom="25dp"
+		android:text="RadioButton"
+		app:layout_constraintBottom_toTopOf="@+id/textView27"
+		app:layout_constraintStart_toStartOf="parent" />
+
+	<TextView
+		android:id="@+id/textView27"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="59dp"
+		android:text="Habits"
+		android:textColor="@color/white"
+		android:textSize="60px"
+		android:textStyle="italic"
+		app:layout_constraintBottom_toTopOf="@+id/radioButton3"
+		app:layout_constraintStart_toStartOf="parent" />
+
+	<RadioButton
+		android:id="@+id/radioButton3"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="53dp"
+		android:layout_marginBottom="11dp"
+		android:text="RadioButton"
+		app:layout_constraintBottom_toTopOf="@+id/radioButton4"
+		app:layout_constraintStart_toStartOf="parent" />
+
+	<RadioButton
+		android:id="@+id/radioButton4"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="53dp"
+		android:layout_marginBottom="1dp"
+		android:text="RadioButton"
+		app:layout_constraintBottom_toTopOf="@+id/textView28"
+		app:layout_constraintStart_toStartOf="parent" />
+
+	<TextView
+		android:id="@+id/textView28"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="59dp"
+		android:text="Expense"
+		android:textColor="@color/white"
+		android:textSize="60px"
+		android:textStyle="italic"
+		app:layout_constraintBottom_toTopOf="@+id/radioButton5"
+		app:layout_constraintStart_toStartOf="parent" />
+
+	<RadioButton
+		android:id="@+id/radioButton5"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="53dp"
+		android:layout_marginBottom="10dp"
+		android:text="RadioButton"
+		app:layout_constraintBottom_toTopOf="@+id/radioButton6"
+		app:layout_constraintStart_toStartOf="parent" />
+
+	<RadioButton
+		android:id="@+id/radioButton6"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="54dp"
+		android:layout_marginBottom="78dp"
+		android:text="RadioButton"
+		app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
+		app:layout_constraintStart_toStartOf="parent" />
+
+	<TextView
+		android:id="@+id/textView12"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="16dp"
+		android:layout_marginTop="24dp"
+		android:text="DuckTiveTwo"
+		android:textColor="@color/white"
+		android:textSize="60px"
+		android:textStyle="bold|italic"
+		app:layout_constraintStart_toEndOf="@+id/imageView5"
+		app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
