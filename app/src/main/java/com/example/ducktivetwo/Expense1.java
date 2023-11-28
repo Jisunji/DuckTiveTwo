@@ -11,6 +11,10 @@ public class Expense1 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
+
         setContentView(R.layout.activity_expense1);
 
 
@@ -26,8 +30,7 @@ public class Expense1 extends AppCompatActivity {
         ImageView img5 = findViewById(R.id.imageView18);
         ImageView img6 = findViewById(R.id.imageView16);
 
-        //burger icon
-        ImageView img7 = findViewById(R.id.imageView26);
+
 
         ImageView img8 = findViewById(R.id.imageView29);
 
@@ -38,11 +41,14 @@ public class Expense1 extends AppCompatActivity {
 
         img4.setOnClickListener(v -> openHabits());
 
-        img5.setOnClickListener(v -> openExpense());
+
+        img5.setOnClickListener(v -> openExpense2());
+
+
 
         img6.setOnClickListener(v -> openProfile());
 
-        img7.setOnClickListener(v -> openProfile());
+
 
         img8.setOnClickListener(v -> openExpense2());
 
@@ -68,10 +74,7 @@ public class Expense1 extends AppCompatActivity {
         Intent intent = new Intent(this, Habits.class);
         startActivity(intent);
     }
-    public void openExpense() {
-        Intent intent = new Intent(this, Expense1.class);
-        startActivity(intent);
-    }
+
 
     public void openExpense2() {
         Intent intent = new Intent(this, Expense2Activity.class);

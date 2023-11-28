@@ -39,7 +39,16 @@ public class Profile extends AppCompatActivity {
 
         img5.setOnClickListener(v -> openExpense());
 
-        img6.setOnClickListener(v -> openProfile());
+
+        boolean currLayout = true;
+        if (currLayout){
+
+        }
+        else{
+            img6.setOnClickListener(v -> openProfile());
+
+        }
+
 
 
         tv1.setOnClickListener(v -> openGoals());
@@ -73,7 +82,7 @@ public class Profile extends AppCompatActivity {
         startActivity(intent);
     }
     public void openExpense() {
-        Intent intent = new Intent(this, Expense1.class);
+        Intent intent = new Intent(this, Expense2Activity.class);
         startActivity(intent);
     }
 

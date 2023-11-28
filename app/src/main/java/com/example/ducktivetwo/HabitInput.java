@@ -18,8 +18,7 @@ public class HabitInput extends AppCompatActivity {
         ImageView img5 = findViewById(R.id.imageView18);
         ImageView img6 = findViewById(R.id.imageView16);
 
-        //burger icon
-        ImageView img7 = findViewById(R.id.imageView26);
+
 
         //notification
         ImageView img9 = findViewById(R.id.imageView27);
@@ -36,7 +35,6 @@ public class HabitInput extends AppCompatActivity {
 
         img6.setOnClickListener(v -> openProfile());
 
-        img7.setOnClickListener(v -> openProfile());
 
     }
     public void openNotifications() {
@@ -63,7 +61,7 @@ public class HabitInput extends AppCompatActivity {
         startActivity(intent);
     }
     public void openExpense() {
-        Intent intent = new Intent(this, Expense1.class);
+        Intent intent = new Intent(this, Expense2Activity.class);
         startActivity(intent);
     }
 

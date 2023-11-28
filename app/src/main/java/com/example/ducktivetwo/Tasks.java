@@ -2,10 +2,14 @@ package com.example.ducktivetwo;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class Tasks extends AppCompatActivity {
 
@@ -15,7 +19,35 @@ public class Tasks extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_list);
 
-        Button button = findViewById(R.id.plusButton);
+       Animation rotateOpen = AnimationUtils.loadAnimation(this, R.anim.rotate_open_anim);
+       Animation rotateClose = AnimationUtils.loadAnimation(this, R.anim.rotate_close_anim);
+
+       Animation fromBottom = AnimationUtils.loadAnimation(this, R.anim.from_bottom_anim);
+
+        Animation toBottom = AnimationUtils.loadAnimation(this, R.anim.to_bottom_anim);
+
+        FloatingActionButton fab1 = findViewById(R.id.floatingActionButton);
+        FloatingActionButton fab2 = findViewById(R.id.floatingActionButton4);
+
+
+
+
+        fab1.setOnClickListener(new View.OnClickListener() {
+            @Override
+
+            public void onClick(View v) {
+                if (fab2.getVisibility() == View.VISIBLE) {
+                    fab2.startAnimation(toBottom);
+                    fab2.setVisibility(View.INVISIBLE);
+                } else {
+                    fab2.startAnimation(fromBottom);
+                    fab2.setVisibility(View.VISIBLE);
+                }
+
+
+            }
+        });
+
 
 
         //notification
@@ -29,24 +61,29 @@ public class Tasks extends AppCompatActivity {
         ImageView img5 = findViewById(R.id.imageView18);
         ImageView img6 = findViewById(R.id.imageView16);
 
-        //burger icon
-        ImageView img7 = findViewById(R.id.imageView26);
+
 
         ImageView img10 = findViewById(R.id.imageView24);
 
-        button.setOnClickListener(v -> openTaskInput());
 
         img2.setOnClickListener(v -> openDashboard());
 
-        img3.setOnClickListener(v -> openTasks());
+
+        boolean currLayout = true;
+        if (currLayout){
+
+        }
+        else{
+            img3.setOnClickListener(v -> openTasks());
+
+        }
+
 
         img4.setOnClickListener(v -> openHabits());
 
         img5.setOnClickListener(v -> openExpense());
 
         img6.setOnClickListener(v -> openProfile());
-
-        img7.setOnClickListener(v -> openProfile());
 
         img10.setOnClickListener(v -> openTaskInput());
 
@@ -73,7 +110,7 @@ public class Tasks extends AppCompatActivity {
 
     }
 
-
+ 
 
     public void openNotifications() {
         Intent intent = new Intent(this, Notifications.class);
@@ -106,7 +143,7 @@ public class Tasks extends AppCompatActivity {
     }
 
     public void openExpense() {
-        Intent intent = new Intent(this, Expense1.class);
+        Intent intent = new Intent(this, Expense2Activity.class);
         startActivity(intent);
     }
 }

@@ -7,6 +7,18 @@
                                                    android:background="@drawable/gradient_with_blur">
 
 
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="44dp"
+        android:text="DuckTiveTwo"
+        android:textColor="@color/white"
+        android:textSize="60px"
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
@@ -137,19 +149,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/textView21"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="32dp"
-        android:text="DuckTiveTwo"
-        android:textColor="@color/white"
-        android:textSize="60px"
-        android:textStyle="bold|italic"
-        app:layout_constraintStart_toEndOf="@+id/imageView22"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
@@ -168,7 +167,7 @@
         android:id="@+id/textView22"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="68dp"
         android:text="Change Your Password"
         android:textColor="@color/white"
         android:textSize="60px"
@@ -183,13 +182,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="200dp"
         android:text="Old Password:"
         android:textColor="@color/white"
         android:textSize="60px"
         android:textStyle="bold|italic"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView22" />
+        tools:layout_editor_absoluteY="270dp" />
 
     <TextView
         android:id="@+id/textView24"
@@ -218,14 +216,6 @@
         app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
     <ImageView
-        android:id="@+id/imageView22"
-        android:layout_width="63dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/burgerreal" /><ImageView
     android:id="@+id/imageView23"
     android:layout_width="37dp"
     android:layout_height="18dp"

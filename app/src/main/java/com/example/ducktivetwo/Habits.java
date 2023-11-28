@@ -2,10 +2,14 @@ package com.example.ducktivetwo;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class Habits extends AppCompatActivity {
     @Override
@@ -13,7 +17,7 @@ public class Habits extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_habits);
 
-        Button button = findViewById(R.id.plusButton);
+
 
         //toolbar
         ImageView img2 = findViewById(R.id.imageView12);
@@ -27,22 +31,64 @@ public class Habits extends AppCompatActivity {
         ImageView img9 = findViewById(R.id.imageView27);
         img9.setOnClickListener(v -> openNotifications());
 
-        //burger icon
-        ImageView img7 = findViewById(R.id.imageView26);
 
-        button.setOnClickListener(v -> openHabitsInput());
+        Animation rotateOpen = AnimationUtils.loadAnimation(this, R.anim.rotate_open_anim);
+        Animation rotateClose = AnimationUtils.loadAnimation(this, R.anim.rotate_close_anim);
+
+        Animation fromBottom = AnimationUtils.loadAnimation(this, R.anim.from_bottom_anim);
+
+        Animation toBottom = AnimationUtils.loadAnimation(this, R.anim.to_bottom_anim);
+
+        FloatingActionButton fab1 = findViewById(R.id.FAB1);
+        FloatingActionButton fab2 = findViewById(R.id.FAB2);
+
+
+
+
+        fab1.setOnClickListener(new View.OnClickListener() {
+            @Override
+
+            public void onClick(View v) {
+                if (fab2.getVisibility() == View.VISIBLE) {
+                    fab2.startAnimation(toBottom);
+                    fab2.setVisibility(View.INVISIBLE);
+                } else {
+                    fab2.startAnimation(fromBottom);
+                    fab2.setVisibility(View.VISIBLE);
+                }
+
+
+            }
+        });
+
+        fab2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openHabitsInput();
+            }
+        });
+
+
 
         img2.setOnClickListener(v -> openDashboard());
 
         img3.setOnClickListener(v -> openTasks());
 
-        img4.setOnClickListener(v -> openHabits());
+        boolean currLayout = true;
+        if (currLayout){
+
+        }
+        else{
+            img4.setOnClickListener(v -> openHabits());
+
+        }
+
 
         img5.setOnClickListener(v -> openExpense());
 
         img6.setOnClickListener(v -> openProfile());
 
-        img7.setOnClickListener(v -> openProfile());
+
 
     }
     public void openNotifications() {
@@ -75,7 +121,7 @@ public class Habits extends AppCompatActivity {
         startActivity(intent);
     }
     public void openExpense() {
-        Intent intent = new Intent(this, Expense1.class);
+        Intent intent = new Intent(this, Expense2Activity.class);
         startActivity(intent);
     }
 

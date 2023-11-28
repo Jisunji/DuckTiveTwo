@@ -7,6 +7,19 @@
                                                    android:background="@drawable/gradient_with_blur">
 
 
+	<TextView
+		android:id="@+id/textView47"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="136dp"
+		android:layout_marginTop="44dp"
+		android:text="DuckTiveTwo"
+		android:textColor="@color/white"
+		android:textSize="60px"
+		android:textStyle="bold|italic"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent" />
+
 	<androidx.constraintlayout.widget.ConstraintLayout
 		android:id="@+id/constraintLayout2"
 		android:layout_width="413dp"
@@ -137,16 +150,6 @@
 	</androidx.constraintlayout.widget.ConstraintLayout>
 
 	<ImageView
-		android:id="@+id/imageView26"
-		android:layout_width="63dp"
-		android:layout_height="54dp"
-		android:layout_marginStart="16dp"
-		android:layout_marginTop="16dp"
-		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toTopOf="parent"
-		app:srcCompat="@drawable/burgerreal" />
-
-	<ImageView
 		android:id="@+id/imageView27"
 		android:layout_width="37dp"
 		android:layout_height="18dp"
@@ -185,14 +188,14 @@
 		android:id="@+id/textView38"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_marginTop="40dp"
+		android:layout_marginTop="28dp"
 		android:text="Tasks"
 		android:textColor="@color/white"
 		android:textSize="60px"
 		android:textStyle="bold|italic"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@+id/textView30" />
+		app:layout_constraintTop_toBottomOf="@+id/textView47" />
 
 	<RelativeLayout
 		android:id="@+id/groupedContainer2"
@@ -291,19 +294,6 @@
 		app:layout_constraintHorizontal_bias="0.506"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toBottomOf="@+id/groupedContainer2" />
-
-	<TextView
-		android:id="@+id/textView30"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_marginStart="28dp"
-		android:layout_marginTop="32dp"
-		android:text="DuckTiveTwo"
-		android:textColor="@color/white"
-		android:textSize="60px"
-		android:textStyle="bold|italic"
-		app:layout_constraintStart_toEndOf="@+id/imageView26"
-		app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

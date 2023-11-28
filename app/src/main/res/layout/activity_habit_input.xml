@@ -6,6 +6,19 @@
                                                    android:layout_height="match_parent"
                                                    android:background="@drawable/gradient_with_blur">
 
+	<TextView
+		android:id="@+id/textView46"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="136dp"
+		android:layout_marginTop="44dp"
+		android:text="DuckTiveTwo"
+		android:textColor="@color/white"
+		android:textSize="60px"
+		android:textStyle="bold|italic"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent" />
+
 	<androidx.constraintlayout.widget.ConstraintLayout
 		android:id="@+id/constraintLayout2"
 		android:layout_width="413dp"
@@ -135,16 +148,6 @@
 
 	</androidx.constraintlayout.widget.ConstraintLayout>
 
-	<ImageView
-		android:id="@+id/imageView26"
-		android:layout_width="63dp"
-		android:layout_height="54dp"
-		android:layout_marginStart="16dp"
-		android:layout_marginTop="16dp"
-		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toTopOf="parent"
-		app:srcCompat="@drawable/burgerreal" />
-
 
 	<pl.droidsonroids.gif.GifImageView
 		android:id="@+id/imageView30"
@@ -252,19 +255,6 @@
 			android:text="Description:" />
 
 	</RelativeLayout>
-
-	<TextView
-		android:id="@+id/textView30"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_marginStart="16dp"
-		android:layout_marginTop="32dp"
-		android:text="DuckTiveTwo"
-		android:textColor="@color/white"
-		android:textSize="60px"
-		android:textStyle="bold|italic"
-		app:layout_constraintStart_toEndOf="@+id/imageView26"
-		app:layout_constraintTop_toTopOf="parent" />
 
 	<ImageView
 		android:id="@+id/imageView27"

@@ -6,6 +6,19 @@ xmlns:tools="http://schemas.android.com/tools"
 android:background="@drawable/gradient_with_blur"
 android:layout_height="match_parent">
 
+	<TextView
+		android:id="@+id/textView20"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="54dp"
+		android:layout_marginBottom="17dp"
+		android:text="Notifications"
+		android:textColor="@color/white"
+		android:textSize="60px"
+		android:textStyle="bold|italic"
+		app:layout_constraintBottom_toTopOf="@+id/textView26"
+		app:layout_constraintStart_toStartOf="parent" />
+
 	<androidx.constraintlayout.widget.ConstraintLayout
 		android:id="@+id/constraintLayout2"
 		android:layout_width="413dp"
@@ -135,16 +148,6 @@ android:layout_height="match_parent">
 
 	</androidx.constraintlayout.widget.ConstraintLayout>
 
-	<ImageView
-		android:id="@+id/imageView5"
-		android:layout_width="63dp"
-		android:layout_height="54dp"
-		android:layout_marginStart="16dp"
-		android:layout_marginTop="16dp"
-		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toTopOf="parent"
-		app:srcCompat="@drawable/burgerreal" />
-
 
 	<ImageView
     android:id="@+id/imageView21"
@@ -172,31 +175,20 @@ android:layout_height="match_parent">
 		app:layout_constraintEnd_toEndOf="parent" />
 
 	<TextView
-		android:id="@+id/textView20"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:text="Notification"
-		android:textColor="@color/white"
-		android:textSize="80px"
-		android:textStyle="italic"
-		app:layout_constraintBottom_toTopOf="@+id/textView26"
-		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintHorizontal_bias="0.208"
-		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@+id/textView12" />
-
-	<TextView
 		android:id="@+id/textView26"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_marginStart="60dp"
 		android:layout_marginBottom="3dp"
 		android:text="Tasks"
 		android:textColor="@color/white"
 		android:textSize="60px"
 		android:textStyle="italic"
 		app:layout_constraintBottom_toTopOf="@+id/radioButton"
-		app:layout_constraintStart_toStartOf="parent" />
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintHorizontal_bias="0.153"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent"
+		app:layout_constraintVertical_bias="0.935" />
 
 	<RadioButton
 		android:id="@+id/radioButton"
@@ -283,16 +275,16 @@ android:layout_height="match_parent">
 		app:layout_constraintStart_toStartOf="parent" />
 
 	<TextView
-		android:id="@+id/textView12"
+		android:id="@+id/textView48"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_marginStart="16dp"
-		android:layout_marginTop="24dp"
+		android:layout_marginTop="16dp"
 		android:text="DuckTiveTwo"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent"
 		android:textColor="@color/white"
 		android:textSize="60px"
-		android:textStyle="bold|italic"
-		app:layout_constraintStart_toEndOf="@+id/imageView5"
-		app:layout_constraintTop_toTopOf="parent" />
+		android:textStyle="bold|italic"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

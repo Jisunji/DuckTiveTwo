@@ -1,11 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
-                                                   xmlns:tools="http://schemas.android.com/tools"
-                                                   android:layout_width="match_parent"
+
+
+
+<ScrollView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:fillViewport="true">
+
+
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+	android:layout_width="match_parent"
                                                    android:layout_height="match_parent"
                                                    android:background="@drawable/gradient_with_blur">
 
+
+	<TextView
+		android:id="@+id/textView42"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="136dp"
+		android:layout_marginTop="44dp"
+		android:text="DuckTiveTwo"
+		android:textColor="@color/white"
+		android:textSize="60px"
+		android:textStyle="bold|italic"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent" />
 
 	<androidx.constraintlayout.widget.ConstraintLayout
 		android:id="@+id/constraintLayout2"
@@ -137,29 +162,6 @@
 	</androidx.constraintlayout.widget.ConstraintLayout>
 
 	<ImageView
-		android:id="@+id/imageView26"
-		android:layout_width="63dp"
-		android:layout_height="54dp"
-		android:layout_marginStart="16dp"
-		android:layout_marginTop="16dp"
-		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toTopOf="parent"
-		app:srcCompat="@drawable/burgerreal" />
-
-	<TextView
-		android:id="@+id/textView30"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_marginStart="12dp"
-		android:layout_marginTop="24dp"
-		android:text="DuckTiveTwo"
-		android:textColor="@color/white"
-		android:textSize="60px"
-		android:textStyle="bold|italic"
-		app:layout_constraintStart_toEndOf="@+id/imageView26"
-		app:layout_constraintTop_toTopOf="parent" />
-
-	<ImageView
 		android:id="@+id/imageView27"
 		android:layout_width="37dp"
 		android:layout_height="18dp"
@@ -178,7 +180,6 @@
 		app:layout_constraintBottom_toTopOf="@+id/groupedContainer2"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@+id/textView30"
 		tools:ignore="MissingConstraints">
 
 
@@ -325,36 +326,6 @@
 
 	</RelativeLayout>
 
-	<Button
-		android:id="@+id/plusButton"
-		android:layout_width="59dp"
-		android:layout_height="44dp"
-		android:layout_gravity="center"
-		android:layout_marginEnd="16dp"
-		android:layout_marginBottom="8dp"
-		android:background="@drawable/mybutton"
-		android:text="+"
-		android:textColor="#FFFFFF"
-		android:textSize="20sp"
-		android:textStyle="bold"
-		app:layout_constraintBottom_toTopOf="@+id/plusButton4"
-		app:layout_constraintEnd_toEndOf="parent" />
-
-	<Button
-		android:id="@+id/plusButton4"
-		android:layout_width="59dp"
-		android:layout_height="44dp"
-		android:layout_gravity="center"
-		android:layout_marginEnd="16dp"
-		android:layout_marginBottom="16dp"
-		android:background="@drawable/mybutton"
-		android:text="+"
-		android:textColor="#FFFFFF"
-		android:textSize="20sp"
-		android:textStyle="bold"
-		app:layout_constraintBottom_toTopOf="@+id/imageView29"
-		app:layout_constraintEnd_toEndOf="parent" />
-
 	<ImageView
 		android:id="@+id/imageView29"
 		android:layout_width="35dp"
@@ -367,3 +338,5 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

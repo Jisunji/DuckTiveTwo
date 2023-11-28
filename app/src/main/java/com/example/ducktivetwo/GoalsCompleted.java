@@ -19,26 +19,28 @@ public class GoalsCompleted extends AppCompatActivity {
         ImageView img9 = findViewById(R.id.imageView27);
         img9.setOnClickListener(v -> openNotifications());
 
-        ImageView img = findViewById(R.id.imageView26);
+
         ImageView img2 = findViewById(R.id.imageView12);
         ImageView img3 = findViewById(R.id.imageView15);
         ImageView img4 = findViewById(R.id.imageView17);
         ImageView img5 = findViewById(R.id.imageView18);
         ImageView img6 = findViewById(R.id.imageView16);
 
-        img.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openProfile();
-            }
-        });
 
-        img2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openDashboard();
-            }
-        });
+
+        boolean currLayout = true;
+        if (currLayout){
+
+        }
+        else{
+            img2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    openDashboard();
+                }
+            });
+        }
+
 
         img3.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,7 +95,7 @@ public class GoalsCompleted extends AppCompatActivity {
         startActivity(intent);
     }
     public void openExpense() {
-        Intent intent = new Intent(this, Expense1.class);
+        Intent intent = new Intent(this, Expense2Activity.class);
         startActivity(intent);
     }
 
