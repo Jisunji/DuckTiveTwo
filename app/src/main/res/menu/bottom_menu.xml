@@ -11,7 +11,10 @@
         android:title="Tasks"
         android:icon="@drawable/ic_baseline_whatshot_24"/>
 
-
+    <item
+        android:id="@+id/Duke"
+        android:title="Dukee"
+        android:icon="@drawable/duckblack"/>
 
     <item
         android:id="@+id/subscriptions"

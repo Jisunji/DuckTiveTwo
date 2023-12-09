@@ -1,6 +1,17 @@
 package com.example.ducktivetwo;
 public class HelperClass {
-    String username, email,password, phone;
+    String id;
+    String username;
+    String email;
+    String password;
+    String phone;
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
     public String getUsername() {
         return username;
     }
@@ -25,11 +36,12 @@ public class HelperClass {
     public void setPassword(String password) {
         this.password = password;
     }
-    public HelperClass(String name, String email, String username, String password) {
+    public HelperClass(String id, String name, String email, String username, String password) {
         this.username = name;
         this.email = email;
         this.phone = username;
         this.password = password;
+        this.id = id;
     }
     public HelperClass() {
     }

@@ -3,138 +3,84 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_gravity="center"
     android:background="@color/lavender"
     tools:context="fragments.HomeFragment">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <TextView
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:textSize="20dp"
-            android:textColor="@color/black"
-            android:layout_height="wrap_content"
-            android:text="Share Fragment"/>
+        android:layout_height="match_parent"
+        android:layout_gravity="center|center_horizontal">
 
         <TextView
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center"
+            android:id="@+id/percentageText"
             android:layout_width="wrap_content"
-            android:textSize="20dp"
-            android:textColor="@color/black"
             android:layout_height="wrap_content"
-            android:text=" Fragment 1"/>
+            android:layout_centerInParent="true"
+            android:text="78%"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/dashboard_circularProgressBar"
+            app:layout_constraintEnd_toEndOf="@+id/dashboard_circularProgressBar"
+            app:layout_constraintStart_toStartOf="@+id/dashboard_circularProgressBar"
+            app:layout_constraintTop_toTopOf="@+id/dashboard_circularProgressBar" />
+
+        <ProgressBar
+            android:id="@+id/dashboard_circularProgressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:layout_centerInParent="true"
+
+            android:layout_marginTop="13dp"
+            android:layout_marginBottom="12dp"
+            android:indeterminate="false"
+            android:progress="78"
+            android:progressDrawable="@drawable/circular_progress_bar"
+            app:layout_constraintBottom_toTopOf="@+id/goalsCompletedText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dateText" />
+
         <TextView
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center"
+            android:id="@+id/goalsCompletedText"
             android:layout_width="wrap_content"
-            android:textSize="20dp"
-            android:textColor="@color/black"
             android:layout_height="wrap_content"
-            android:text="Share Fragment"/>
+            android:layout_below="@id/percentageText"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="145dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="144dp"
+            android:text="Goals Completed"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dashboard_circularProgressBar" />
+
         <TextView
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center"
+            android:id="@+id/dateText"
             android:layout_width="wrap_content"
-            android:textSize="20dp"
-            android:textColor="@color/black"
             android:layout_height="wrap_content"
-            android:text="Share Fragment"/>
-        <TextView
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:textSize="20dp"
-            android:textColor="@color/black"
-            android:layout_height="wrap_content"
-            android:text="Share Fragment"/>
-        <TextView
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:textSize="20dp"
-            android:textColor="@color/black"
-            android:layout_height="wrap_content"
-            android:text="Share Fragment"/>
-        <TextView
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:textSize="20dp"
-            android:textColor="@color/black"
-            android:layout_height="wrap_content"
-            android:text="Share Fragment"/>
+            android:layout_below="@id/goalsCompletedText"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="114dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="120dp"
+            android:gravity="center"
+            android:text="Started from Nov 7-14, 2023"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <pl.droidsonroids.gif.GifImageView
-
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginTop="60dp"
-            android:layout_gravity="center"
-            android:src="@drawable/duckduck"/>
-        <pl.droidsonroids.gif.GifImageView
-
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginTop="60dp"
-            android:layout_gravity="center"
-            android:src="@drawable/duckduck"/>
-        <pl.droidsonroids.gif.GifImageView
-
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginTop="60dp"
-            android:layout_gravity="center"
-            android:src="@drawable/duckduck"/>
-        <pl.droidsonroids.gif.GifImageView
-
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginTop="60dp"
-            android:layout_gravity="center"
-            android:src="@drawable/duckduck"/>
-        <pl.droidsonroids.gif.GifImageView
-
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginTop="60dp"
-            android:layout_gravity="center"
-            android:src="@drawable/duckduck"/>
-        <pl.droidsonroids.gif.GifImageView
-
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginTop="60dp"
-            android:layout_gravity="center"
-            android:src="@drawable/duckduck"/>
-
-        <com.google.android.material.tabs.TabLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Monday" />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tuesday" />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Wednesday" />
-        </com.google.android.material.tabs.TabLayout>
-
-
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 

@@ -25,16 +25,23 @@ import com.example.ducktivetwo.AddTransactionActivity;
 import com.example.ducktivetwo.MainActivity2;
 import com.example.ducktivetwo.R;
 import com.example.ducktivetwo.databinding.FragmentExpenseBinding;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 
 import Model.Data;
 
@@ -64,20 +71,40 @@ public class ExpenseFragment extends Fragment {
     private DatabaseReference mExpenseDatabase;
     private FirebaseAuth mAuth;
 
-    private RecyclerView recyclerView;
+    //Dashboard expense result..
+
+    private TextView totalExpenseResult;
+
+    RecyclerView recyclerView;
+    MyAdapter myAdapter;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        mAuth = FirebaseAuth.getInstance();
 
         View myview = inflater.inflate(R.layout.fragment_expense, container, false);
+        recyclerView = (RecyclerView)myview.findViewById(R.id.rcv);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        mAuth = FirebaseAuth.getInstance();
+        FirebaseRecyclerOptions<Data> options =
+                new FirebaseRecyclerOptions.Builder<Data>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("users")
+                                .child(Objects.requireNonNull(mAuth.getCurrentUser()).getUid()).child("Expense_Data"), Data.class)
+                        .build();
+        myAdapter = new MyAdapter(options);
+        recyclerView.setAdapter(myAdapter);
+        loadDataFromFirebase();
+
+
+        
         FirebaseUser nUser= mAuth.getCurrentUser();
         if(nUser != null) {
-            String uid=nUser.getUid(); //Do what you need to do with the id
+            String uid=nUser.getUid();
             mIncomeDatabase= FirebaseDatabase.getInstance().getReference().child("IncomeData").child(uid);
-            mExpenseDatabase = FirebaseDatabase.getInstance().getReference().child("ExpenseData").child(uid);
+            mExpenseDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("Expense_Data");
+
         }
 
 
@@ -91,6 +118,10 @@ public class ExpenseFragment extends Fragment {
         //Connect Floating Text
         fab_income_txt=myview.findViewById(R.id.income_ft_text);
         fab_expense_txt=myview.findViewById(R.id.expense_ft_text);
+
+        //Total expense result..
+
+        totalExpenseResult=myview.findViewById(R.id.expense_text_result);
 
         //Animation Connect..
 
@@ -127,43 +158,35 @@ public class ExpenseFragment extends Fragment {
                 }
             }
         });
+
+        //total expense
+
+        mExpenseDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int totalsum = 0;
+                for (DataSnapshot mysnapshot:snapshot.getChildren()){
+
+                    Data data=mysnapshot.getValue(Data.class);
+                    totalsum+=data.getAmount();
+
+                    String strTotalSum=String.valueOf(totalsum);
+
+                    totalExpenseResult.setText(strTotalSum);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         return myview;
+
+
     }
-    @Override
-    public void onStart(){
-        super.onStart();
-    }
-    private static class MyViewHolder extends RecyclerView.ViewHolder{
 
-        View mView;
-
-
-
-        public MyViewHolder(@NonNull View itemView) {
-            super(itemView);
-            mView = itemView;
-        }
-
-        private void setDate(String date){
-            TextView mDate = mView.findViewById(R.id.data_txt_expense);
-            mDate.setText(date);
-        }
-        private void setType(String type){
-            TextView mType = mView.findViewById(R.id.data_txt_expense);
-            mType.setText(type);
-        }
-        private void setNote(String note){
-            TextView mNote = mView.findViewById(R.id.data_txt_expense);
-            mNote.setText(note);
-        }
-        private void setAmount(String amount){
-            TextView mAmount = mView.findViewById(R.id.data_txt_expense);
-
-            String strAmount = String.valueOf(amount);
-
-            mAmount.setText(strAmount);
-        }
-    }
 
 
     private void ftAnimation(){
@@ -338,4 +361,44 @@ public class ExpenseFragment extends Fragment {
 
         dialog.show();
     }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        myAdapter.startListening();
+    }
+    @Override
+    public void onStop(){
+        super.onStop();
+        myAdapter.stopListening();
+    }
+    private void loadDataFromFirebase() {
+        DatabaseReference yourDataNodeRef = FirebaseDatabase.getInstance().getReference().child("users").child("Expense_Data");
+
+        yourDataNodeRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                List<Data> dataList = new ArrayList<>();
+                for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+                    Data data = childSnapshot.getValue(Data.class);
+                    if (data != null) {
+                        dataList.add(data);
+                    }
+                }
+                myAdapter.setDataList(dataList);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle error
+            }
+        });
+
+
+    }
+
+
+
+
+
 }

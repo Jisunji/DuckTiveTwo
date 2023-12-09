@@ -23,6 +23,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -69,6 +70,7 @@ public class SignUp extends AppCompatActivity {
                 database = FirebaseDatabase.getInstance();
                 reference = database.getReference("users");
 
+
                 String username = signupUname.getText().toString().trim();
                 String email = signupEmail.getText().toString().trim();
                 String password = signupPassword.getText().toString().trim();
@@ -86,10 +88,17 @@ public class SignUp extends AppCompatActivity {
                 if(phone.isEmpty()){
                     signupPhone.setError("Required field...");
                 }else{
-                    auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    Object nUser = auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
+                                FirebaseUser nUser = auth.getCurrentUser();
+                                if(nUser!=null){
+                                    String id = nUser.getUid();
+
+                                    HelperClass helperClass = new HelperClass(id, username, email, phone, password);
+                                    reference.child(id).child("user_data").setValue(helperClass);
+                                }
                                 Toast.makeText(SignUp.this, "Sign Up Successful", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(SignUp.this, LogIn.class));
                             }else{
@@ -98,8 +107,6 @@ public class SignUp extends AppCompatActivity {
                         }
                     });
                 }
-                HelperClass helperClass = new HelperClass(username, email, phone, password);
-                reference.child(username).setValue(helperClass);
             }
         });
 

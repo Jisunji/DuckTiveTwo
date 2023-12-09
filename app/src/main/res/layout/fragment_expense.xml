@@ -23,23 +23,7 @@
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:layout_height="wrap_content">
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:textAppearanceLarge"
-                        android:textColor="@color/black"
-                        android:text="Income"
-                        />
 
-
-
-
-                </RelativeLayout>
 
 
                 <RelativeLayout
@@ -47,14 +31,14 @@
                     android:layout_weight="1"
                     android:layout_gravity="center"
                     android:layout_height="wrap_content">
+
                     <TextView
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAppearance="?android:textAppearanceLarge"
-                        android:textColor="@color/red"
                         android:text="Expense"
-                        />
-
+                        android:textAppearance="?android:textAppearanceLarge"
+                        android:textColor="@color/red" />
 
 
                 </RelativeLayout>
@@ -68,22 +52,7 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="7dp"
                 android:layout_height="wrap_content">
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/income_set_result"
-                        android:textAppearance="?android:textAppearanceLarge"
-                        android:textColor="@color/black"
-                        android:text="000.00"
-                        />
 
-
-                </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="0dp"
@@ -126,7 +95,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_marginRight="15dp"
-            android:layout_marginBottom="250dp">
+            android:layout_marginBottom="250dp"
+            android:elevation="90dp">
 
             <TextView
                 android:id="@+id/expense_ft_text"
@@ -147,7 +117,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|end"
                 android:backgroundTint="#07bca4"
-                android:elevation="6dp"
+                android:translationZ="90dp"
                 android:src="@drawable/baseline_income"
                 android:visibility="invisible"
                 app:fabSize="mini"
@@ -160,7 +130,8 @@
             android:layout_gravity="bottom|end"
             android:layout_marginRight="15dp"
             android:layout_marginBottom="180dp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:elevation="90dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -183,6 +154,7 @@
                 android:layout_gravity="bottom|end"
                 android:backgroundTint="#353923"
                 android:elevation="6dp"
+                android:translationZ="90dp"
                 app:pressedTranslationZ="12dp"
                 android:visibility="invisible"
                 android:src="@drawable/baseline_add"
@@ -193,17 +165,44 @@
         </LinearLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:layout_width="wrap_content"
             android:id="@+id/fb_main_plus_btn"
+            android:layout_width="wrap_content"
+            android:translationZ="90dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            android:layout_marginBottom="105dp"
             android:layout_marginRight="20dp"
+            android:layout_marginBottom="105dp"
             android:backgroundTint="#6A1B9A"
-            app:fabSize="normal"
             android:src="@drawable/baseline_add"
-            android:layout_height="wrap_content" />
-            />
+            app:fabSize="normal"
+            tools:ignore="SpeakableTextPresentCheck" />
 
+
+        <RelativeLayout
+            android:id="@+id/groupedContainer"
+            android:layout_width="380dp"
+            android:layout_height="622dp"
+            android:layout_margin="16dp"
+            android:elevation="2dp"
+            app:layout_constraintBottom_toTopOf="@+id/groupedContainer2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints">
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcv"
+                android:layout_width="373dp"
+                android:layout_height="619dp"
+                android:layout_centerInParent="true"
+                android:background="@android:color/transparent"
+                android:cacheColorHint="@android:color/transparent"
+                android:divider="@android:color/darker_gray"
+                android:dividerHeight="1dp"
+                android:scrollbars="vertical" />
+
+
+        </RelativeLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

@@ -31,6 +31,7 @@ import com.google.android.material.navigation.NavigationView;
 import fragments.ExpenseFragment;
 import fragments.HabitsFragment;
 import fragments.HomeFragment;
+import fragments.Profile;
 import fragments.TasksFragment;
 
 
@@ -46,7 +47,6 @@ public class MainActivity2 extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        additem = findViewById(R.id.additem);
         drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -80,7 +80,10 @@ public class MainActivity2 extends AppCompatActivity {
                 replaceFragment(new HabitsFragment());
             } else if (itemId == R.id.library) {
                 replaceFragment(new ExpenseFragment());
+            } else if (itemId == R.id.Duke){
+                replaceFragment(new Profile());
             }
+
             else if (itemId == R.id.nav_home) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new HomeFragment()).commit();
             } else if (itemId == R.id.nav_settings) {
