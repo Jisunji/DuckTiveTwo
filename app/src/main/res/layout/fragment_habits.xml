@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/lavender"
-    tools:context="fragments.HabitsFragment">
+    tools:context="fragments.HabitsFragment"
+    android:orientation="horizontal">
 
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -15,7 +17,7 @@
 
 
 
-        <LinearLayout
+       <!-- <LinearLayout
             android:layout_width="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_marginRight="15dp"
@@ -43,12 +45,51 @@
                 android:layout_gravity="bottom|end"
                 android:backgroundTint="#353923"
                 android:elevation="6dp"
-
-                android:src="@drawable/baseline_add"
+                android:translationZ="90dp"
+                app:pressedTranslationZ="12dp"
                 android:visibility="invisible"
+                android:src="@drawable/baseline_add"
 
 
                 />
+
+        </LinearLayout>
+
+        -->
+
+        <LinearLayout
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="180dp"
+            android:elevation="90dp">
+
+            <TextView
+                android:id="@+id/habits_ft_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="5dp"
+                android:background="@color/lavender"
+                android:padding="5dp"
+                android:text="Create A Habit"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:textColor="@color/white"
+                android:visibility="invisible" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/habits_ft_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:backgroundTint="#07bca4"
+                android:translationZ="90dp"
+                android:src="@drawable/baseline_add"
+                android:visibility="invisible"
+                app:fabSize="mini"
+                app:pressedTranslationZ="12dp" />
 
         </LinearLayout>
 
@@ -59,7 +100,7 @@
             android:layout_marginBottom="105dp"
             android:layout_marginRight="20dp"
             android:backgroundTint="#6A1B9A"
-
+            android:translationZ="90dp"
             android:src="@drawable/baseline_add"
             android:layout_height="wrap_content" />
 
@@ -67,46 +108,31 @@
 
         <RelativeLayout
             android:id="@+id/groupedContainer"
-            android:layout_width="347dp"
-            android:layout_height="160dp"
+            android:layout_width="380dp"
+            android:layout_height="622dp"
             android:layout_margin="16dp"
-            tools:ignore="MissingConstraints">
+            android:elevation="2dp"
+            tools:ignore="MissingConstraints"
+            app:layout_constraintBottom_toTopOf="@+id/groupedContainer2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
-            <ImageView
-                android:id="@+id/rectangleBackground"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/lavender"
-                android:scaleType="fitXY" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
+                android:id="@+id/habitRCV"
                 android:layout_width="298dp"
-                android:layout_height="118dp"
+                android:layout_height="619dp"
                 android:layout_centerInParent="true"
                 android:background="@android:color/transparent"
                 android:cacheColorHint="@android:color/transparent"
                 android:divider="@android:color/darker_gray"
                 android:dividerHeight="1dp"
                 android:scrollbars="vertical" />
-
-
         </RelativeLayout>
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-    <pl.droidsonroids.gif.GifImageView
-        android:id="@+id/imageView24"
-        android:layout_width="100dp"
-        android:layout_height="116dp"
-        android:layout_gravity="center"
 
-        android:layout_marginStart="155dp"
-        android:layout_marginEnd="84dp"
-        android:layout_marginBottom="88dp"
-        android:src="@drawable/duckduck"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/habits_fab"
-        app:layout_constraintStart_toStartOf="parent" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 
 
 </LinearLayout>

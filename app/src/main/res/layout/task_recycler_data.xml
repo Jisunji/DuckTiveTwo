@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:elevation="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_margin="5dp"
+        android:layout_height="100dp">
+
+        <RelativeLayout
+            android:layout_width="50dp"
+            android:layout_height="100dp"
+            android:layout_weight="0">
+
+            <TextView
+                android:id="@+id/date_txt_task"
+                android:layout_width="50dp"
+                android:layout_height="100dp"
+
+                android:text="6 June 2023"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:textColor="@color/date_color"
+                android:textStyle="bold" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="50dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/taskname_txt_tasks"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:text="Tasks Name"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:textColor="@color/date_color"
+                android:textStyle="bold"
+
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:text="Description"
+                android:textSize="10dp"
+
+                android:textAppearance="?android:textAppearanceSmall"
+
+                android:textColor="@android:color/black"
+                android:layout_below="@id/taskname_txt_tasks"
+                android:id="@+id/desc_txt_tasks"
+
+
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Priority"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:textStyle="bold"
+                android:id="@+id/priority_txt_tasks"
+                android:textColor="@color/expense_amount"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:text="Category"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:textStyle="bold"
+                android:id="@+id/category_txt_tasks"
+                android:layout_below="@id/priority_txt_tasks"
+                android:textColor="@android:color/black"/>
+
+
+        </RelativeLayout>
+
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

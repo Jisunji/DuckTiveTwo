@@ -4,48 +4,46 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent">
-    
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
                 <RelativeLayout
                     android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:gravity="center"
-                    android:layout_height="wrap_content">
+                    android:layout_weight="1"
+                    android:gravity="center">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="TASK NAME:"/>
-
+                        android:text="TASK NAME:" />
 
 
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="0dp"
-                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:layout_height="wrap_content">
-                    
+                    android:layout_weight="2">
+
                     <EditText
+                        android:id="@+id/taskname_edt"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/taskname_edt"/>
-
-
-
+                        android:layout_height="wrap_content" />
 
 
                 </RelativeLayout>
@@ -54,37 +52,34 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
                 <RelativeLayout
                     android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:gravity="center"
-                    android:layout_height="wrap_content">
+                    android:layout_weight="1"
+                    android:gravity="center">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="CATEGORY:"/>
-
+                        android:text="CATEGORY:" />
 
 
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="0dp"
-                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:layout_height="wrap_content">
+                    android:layout_weight="2">
 
                     <EditText
+                        android:id="@+id/category_edt"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/category_edt"/>
-
-
-
+                        android:layout_height="wrap_content" />
 
 
                 </RelativeLayout>
@@ -93,37 +88,71 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
                 <RelativeLayout
                     android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:gravity="center"
-                    android:layout_height="wrap_content">
+                    android:layout_weight="1"
+                    android:gravity="center">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="DESCRIPTION:"/>
-
+                        android:text="PRIORITY:" />
 
 
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="0dp"
-                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:layout_height="wrap_content">
+                    android:layout_weight="2">
 
                     <EditText
+                        android:id="@+id/priority_edt"
                         android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/description_edt"/>
+                        android:text="DESCRIPTION:" />
 
 
+                </RelativeLayout>
 
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_weight="2">
+
+                    <EditText
+                        android:id="@+id/description_edt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
 
 
                 </RelativeLayout>
@@ -132,48 +161,46 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
                 <RelativeLayout
                     android:layout_width="0dp"
-                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:gravity="center"
-                    android:layout_height="wrap_content">
+                    android:layout_weight="2"
+                    android:gravity="center">
 
                     <Button
+                        android:id="@+id/btnCancel"
                         android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/lavender"
                         android:text="CANCEL"
                         android:textAppearance="?android:textAppearanceMedium"
-                        android:textColor="@android:color/white"
-                        android:background="@color/lavender"
-                        android:id="@+id/btnCancel"
-                        android:layout_height="wrap_content"/>
-
+                        android:textColor="@android:color/white" />
 
 
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="0dp"
-                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:gravity="center"
-                    android:layout_height="wrap_content">
+                    android:layout_weight="2"
+                    android:gravity="center">
 
                     <Button
+                        android:id="@+id/btnSave"
                         android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/lavender"
                         android:text="SAVE"
                         android:textAppearance="?android:textAppearanceMedium"
-                        android:textColor="@android:color/white"
-                        android:background="@color/lavender"
-                        android:id="@+id/btnSave"
-                        android:layout_height="wrap_content"/>
-
+                        android:textColor="@android:color/white" />
 
 
                 </RelativeLayout>
-
 
 
             </LinearLayout>

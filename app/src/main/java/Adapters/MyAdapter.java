@@ -1,4 +1,4 @@
-package fragments;
+package Adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,7 +44,7 @@ public class MyAdapter extends FirebaseRecyclerAdapter<Data,MyAdapter.myViewHold
         return new myViewHolder(view);
     }
 
-    public void setDataList(List<Data> dataList) {
+    public void setExpenseDataList(List<Data> dataList) {
         this.dataList = dataList;
         notifyDataSetChanged();
     }
@@ -55,10 +55,10 @@ public class MyAdapter extends FirebaseRecyclerAdapter<Data,MyAdapter.myViewHold
         public myViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            date = (TextView)itemView.findViewById(R.id.date_txt_expense);
-            type = (TextView)itemView.findViewById(R.id.type_txt_expense);
-            note = (TextView) itemView.findViewById(R.id.note_txt_expense);
-            amount = (TextView) itemView.findViewById(R.id.amount_txt_expense);
+            date =itemView.findViewById(R.id.date_txt_expense);
+            type =itemView.findViewById(R.id.type_txt_expense);
+            note =itemView.findViewById(R.id.note_txt_expense);
+            amount =itemView.findViewById(R.id.amount_txt_expense);
 
         }
     }
