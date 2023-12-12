@@ -62,6 +62,7 @@ public class ExpenseFragment extends Fragment {
 
     //Firebase...
     private DatabaseReference mExpenseDatabase;
+    private DatabaseReference mThresholdDatabase;
     private FirebaseAuth mAuth;
 
     //Dashboard expense result..
@@ -71,13 +72,13 @@ public class ExpenseFragment extends Fragment {
     RecyclerView recyclerView;
     MyAdapter myAdapter;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mAuth = FirebaseAuth.getInstance();
 
         View myview = inflater.inflate(R.layout.fragment_expense, container, false);
+        TextView threshold = myview.findViewById(R.id.threshold_text_result);
         recyclerView = (RecyclerView)myview.findViewById(R.id.rcv);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -89,11 +90,13 @@ public class ExpenseFragment extends Fragment {
         myAdapter = new MyAdapter(options);
         recyclerView.setAdapter(myAdapter);
         loadDataFromFirebase();
+        loadThresholdFromFirebase(threshold);
 
         FirebaseUser nUser= mAuth.getCurrentUser();
         if(nUser != null) {
             String uid=nUser.getUid();
             mExpenseDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("Expense_Data");
+            mThresholdDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("Expense_Threshold");
         }
 
 
@@ -165,6 +168,9 @@ public class ExpenseFragment extends Fragment {
                     String strTotalSum=String.valueOf(totalsum);
 
                     totalExpenseResult.setText(strTotalSum);
+                    if(Long.parseLong(strTotalSum) >= (Long.parseLong(threshold.getText().toString()))/2){
+                        Toast.makeText(getActivity(), "Nearing expense threshold", Toast.LENGTH_SHORT).show();
+                    }
 
                 }
             }
@@ -313,6 +319,10 @@ public class ExpenseFragment extends Fragment {
                 }
 
                 int inamount = Integer.parseInt(Thamount);
+                mThresholdDatabase.setValue(inamount);
+                Toast.makeText(getActivity(), "THRESHOLD DATA ADDED", Toast.LENGTH_SHORT).show();
+                ftAnimation();
+                dialog.dismiss();
             }
         });
         btnCancel.setOnClickListener(new View.OnClickListener() {
@@ -338,6 +348,35 @@ public class ExpenseFragment extends Fragment {
         super.onStop();
         myAdapter.stopListening();
     }
+
+    private void loadThresholdFromFirebase(TextView textView){
+        DatabaseReference yourDataNodeRef = FirebaseDatabase.getInstance().getReference().child("users").child(mAuth.getUid()).child("Expense_Threshold");
+        yourDataNodeRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String value = String.valueOf(dataSnapshot.getValue(Long.class));
+                if(value.equals("null")){
+                    textView.setText("000.00");
+                }
+                else{
+                    textView.setText((value));
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Failed to read value
+
+            }
+        });
+
+    }
+
+
    private void loadDataFromFirebase() {
         DatabaseReference yourDataNodeRef = FirebaseDatabase.getInstance().getReference().child("users").child("Expense_Data");
 
