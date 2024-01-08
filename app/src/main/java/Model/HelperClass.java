@@ -1,4 +1,4 @@
-package com.example.ducktivetwo;
+package Model;
 public class HelperClass {
     String id;
     String username;

@@ -24,6 +24,8 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".CompanionActivity" />
+        <activity
             android:name=".ExpenseFragment11"
             android:exported="false" />
         <activity

@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.Layout;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,7 +43,6 @@ public class ExpenseFragment extends Fragment {
 
     //Floating Button
 
-    private FloatingActionButton fab_main_btn;
     private FloatingActionButton fab_threshold_btn;
     private FloatingActionButton fab_expense_btn;
 
@@ -66,7 +64,6 @@ public class ExpenseFragment extends Fragment {
     private FirebaseAuth mAuth;
 
     //Dashboard expense result..
-
     private TextView totalExpenseResult;
 
     RecyclerView recyclerView;
@@ -99,63 +96,52 @@ public class ExpenseFragment extends Fragment {
             mThresholdDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("Expense_Threshold");
         }
 
-
-
-
         //Connect floating action button to layout
-        fab_main_btn=myview.findViewById(R.id.fb_main_plus_btn);
+        FloatingActionButton fab_main_btn = myview.findViewById(R.id.fb_main_plus_btn);
         fab_threshold_btn=myview.findViewById(R.id.threshold_ft_btn);
-        //fab_income_btn=myview.findViewById(R.id.income_ft_btn);
         fab_expense_btn=myview.findViewById(R.id.expense_ft_btn);
 
         //Connect Floating Text
-        //fab_income_txt=myview.findViewById(R.id.income_ft_text);
         fab_threshold_txt=myview.findViewById(R.id.threshold_ft_text);
         fab_expense_txt=myview.findViewById(R.id.expense_ft_text);
 
         //Total expense result..
-
         totalExpenseResult=myview.findViewById(R.id.expense_text_result);
 
         //Animation Connect..
-
         FadeOpen= AnimationUtils.loadAnimation(getActivity(),R.anim.fade_open);
         FadeClose=AnimationUtils.loadAnimation(getActivity(),R.anim.fade_close);
 
-        fab_main_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        fab_main_btn.setOnClickListener(v -> {
 
-                addData();
-                if (isOpen){
-                    fab_threshold_btn.startAnimation(FadeClose);
-                    fab_expense_btn.startAnimation(FadeClose);
-                    fab_threshold_btn.setClickable(false);
-                    fab_expense_btn.setClickable(false);
+            addData();
+            if (isOpen){
+                fab_threshold_btn.startAnimation(FadeClose);
+                fab_expense_btn.startAnimation(FadeClose);
+                fab_threshold_btn.setClickable(false);
+                fab_expense_btn.setClickable(false);
 
-                    fab_threshold_txt.startAnimation(FadeClose);
-                    fab_expense_txt.startAnimation(FadeClose);
-                    fab_threshold_txt.setClickable(false);
-                    fab_expense_txt.setClickable(false);
-                    isOpen=false;
-                }else{
-                    fab_threshold_btn.startAnimation(FadeOpen);
-                    fab_expense_btn.startAnimation(FadeOpen);
-                    fab_threshold_btn.setClickable(true);
-                    fab_expense_btn.setClickable(true);
+                fab_threshold_txt.startAnimation(FadeClose);
+                fab_expense_txt.startAnimation(FadeClose);
+                fab_threshold_txt.setClickable(false);
+                fab_expense_txt.setClickable(false);
+                isOpen=false;
+            }else{
+                fab_threshold_btn.startAnimation(FadeOpen);
+                fab_expense_btn.startAnimation(FadeOpen);
+                fab_threshold_btn.setClickable(true);
+                fab_expense_btn.setClickable(true);
 
-                    fab_threshold_txt.startAnimation(FadeOpen);
-                    fab_expense_txt.startAnimation(FadeOpen);
-                    fab_threshold_txt.setClickable(true);
-                    fab_expense_txt.setClickable(true);
+                fab_threshold_txt.startAnimation(FadeOpen);
+                fab_expense_txt.startAnimation(FadeOpen);
+                fab_threshold_txt.setClickable(true);
+                fab_expense_txt.setClickable(true);
 
-                    isOpen=true;
-                }
+                isOpen=true;
             }
         });
 
         //total expense
-
         mExpenseDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -163,15 +149,19 @@ public class ExpenseFragment extends Fragment {
                 for (DataSnapshot mysnapshot:snapshot.getChildren()){
 
                     Data data=mysnapshot.getValue(Data.class);
+                    assert data != null;
                     totalsum+=data.getAmount();
 
                     String strTotalSum=String.valueOf(totalsum);
 
                     totalExpenseResult.setText(strTotalSum);
-                    if(Long.parseLong(strTotalSum) >= (Long.parseLong(threshold.getText().toString()))/2){
-                        Toast.makeText(getActivity(), "Nearing expense threshold", Toast.LENGTH_SHORT).show();
-                    }
-
+                }
+                if((totalsum >= (Long.parseLong(threshold.getText().toString()))*0.8) && (totalsum < (Long.parseLong(threshold.getText().toString())))) {
+                    Toast.makeText(getActivity(), "Nearing expense threshold", Toast.LENGTH_SHORT).show();
+                } else if ((totalsum == Long.parseLong(threshold.getText().toString()))) {
+                    Toast.makeText(getActivity(), "Reached expense threshold", Toast.LENGTH_SHORT).show();
+                } else if ((totalsum > Long.parseLong(threshold.getText().toString()))) {
+                    Toast.makeText(getActivity(), "Exceeded expense threshold", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -211,19 +201,8 @@ public class ExpenseFragment extends Fragment {
         }
     }
     private void addData(){
-        fab_expense_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                expenseDataInsert();
-            }
-        });
-
-        fab_threshold_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                thresholdDataInsert();
-            }
-        });
+        fab_expense_btn.setOnClickListener(v -> expenseDataInsert());
+        fab_threshold_btn.setOnClickListener(v -> thresholdDataInsert());
     }
 
     public void expenseDataInsert(){
@@ -245,47 +224,42 @@ public class ExpenseFragment extends Fragment {
         Button btnSave = myView.findViewById(R.id.btnSave);
         Button btnCancel = myView.findViewById(R.id.btnCancel);
 
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String tmAmount = amount.getText().toString().trim();
-                String tmType = type.getText().toString().trim();
-                String tmNote = note.getText().toString().trim();
+        btnSave.setOnClickListener(v -> {
+            String tmAmount = amount.getText().toString().trim();
+            String tmType = type.getText().toString().trim();
+            String tmNote = note.getText().toString().trim();
 
-                if(TextUtils.isEmpty(tmAmount)){
-                    amount.setError("Required field...");
-                    return;
-                }
-
-                int inamount = Integer.parseInt(tmAmount);
-                if(TextUtils.isEmpty(tmType)){
-                    type.setError("Required field...");
-                    return;
-                }
-                if(TextUtils.isEmpty(tmNote)){
-                    note.setError("Required field...");
-                    return;
-                }
-
-                String id = mExpenseDatabase.push().getKey();
-
-                String mDate = DateFormat.getDateInstance().format(new Date());
-
-                Data data1 = new Data(inamount, tmType, tmNote, id, mDate);
-
-                mExpenseDatabase.child(id).setValue(data1);
-                Toast.makeText(getActivity(), "EXPENSE DATA ADDED", Toast.LENGTH_SHORT).show();
-                ftAnimation();
-                dialog.dismiss();
+            if(TextUtils.isEmpty(tmAmount)){
+                amount.setError("Required field...");
+                return;
             }
+
+            int inamount = Integer.parseInt(tmAmount);
+            if(TextUtils.isEmpty(tmType)){
+                type.setError("Required field...");
+                return;
+            }
+            if(TextUtils.isEmpty(tmNote)){
+                note.setError("Required field...");
+                return;
+            }
+
+            String id = mExpenseDatabase.push().getKey();
+
+            String mDate = DateFormat.getDateInstance().format(new Date());
+
+            Data data1 = new Data(inamount, tmType, tmNote, id, mDate);
+
+            assert id != null;
+            mExpenseDatabase.child(id).setValue(data1);
+            Toast.makeText(getActivity(), "EXPENSE DATA ADDED", Toast.LENGTH_SHORT).show();
+            ftAnimation();
+            dialog.dismiss();
         });
 
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ftAnimation();
-                dialog.dismiss();
-            }
+        btnCancel.setOnClickListener(v -> {
+            ftAnimation();
+            dialog.dismiss();
         });
 
         dialog.show();
@@ -308,29 +282,21 @@ public class ExpenseFragment extends Fragment {
         Button btnSave =myvieww.findViewById(R.id.btnSave);
         Button btnCancel =myvieww.findViewById(R.id.btnCancel);
 
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String Thamount =amount.getText().toString().trim();
-
-                if(TextUtils.isEmpty(Thamount)){
-                    amount.setError("Required Amount...");
-                    return;
-                }
-
-                int inamount = Integer.parseInt(Thamount);
-                mThresholdDatabase.setValue(inamount);
-                Toast.makeText(getActivity(), "THRESHOLD DATA ADDED", Toast.LENGTH_SHORT).show();
-                ftAnimation();
-                dialog.dismiss();
+        btnSave.setOnClickListener(v -> {
+            String Thamount =amount.getText().toString().trim();
+            if(TextUtils.isEmpty(Thamount)){
+                amount.setError("Required Amount...");
+                return;
             }
+            int inamount = Integer.parseInt(Thamount);
+            mThresholdDatabase.setValue(inamount);
+            Toast.makeText(getActivity(), "THRESHOLD DATA ADDED", Toast.LENGTH_SHORT).show();
+            ftAnimation();
+            dialog.dismiss();
         });
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ftAnimation();
-                dialog.dismiss();
-            }
+        btnCancel.setOnClickListener(v -> {
+            ftAnimation();
+            dialog.dismiss();
         });
 
         dialog.show();
@@ -350,7 +316,7 @@ public class ExpenseFragment extends Fragment {
     }
 
     private void loadThresholdFromFirebase(TextView textView){
-        DatabaseReference yourDataNodeRef = FirebaseDatabase.getInstance().getReference().child("users").child(mAuth.getUid()).child("Expense_Threshold");
+        DatabaseReference yourDataNodeRef = FirebaseDatabase.getInstance().getReference().child("users").child(Objects.requireNonNull(mAuth.getUid())).child("Expense_Threshold");
         yourDataNodeRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -358,13 +324,11 @@ public class ExpenseFragment extends Fragment {
                 // whenever data at this location is updated.
                 String value = String.valueOf(dataSnapshot.getValue(Long.class));
                 if(value.equals("null")){
-                    textView.setText("000.00");
+                    textView.setText("000");
                 }
                 else{
                     textView.setText((value));
                 }
-
-
             }
 
             @Override

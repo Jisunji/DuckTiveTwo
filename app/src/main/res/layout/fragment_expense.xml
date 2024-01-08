@@ -100,7 +100,7 @@
                         android:id="@+id/threshold_text_result"
                         android:textAppearance="?android:textAppearanceLarge"
                         android:textColor="@color/green"
-                        android:text="000.00"
+                        android:text="000"
                         />
 
 

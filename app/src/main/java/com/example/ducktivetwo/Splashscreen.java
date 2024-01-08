@@ -2,6 +2,7 @@ package com.example.ducktivetwo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -11,6 +12,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import org.w3c.dom.Text;
 
+@SuppressLint("CustomSplashScreen")
 public class Splashscreen extends AppCompatActivity {
 private FirebaseAuth mFirebaseAuth;
 
@@ -20,8 +22,6 @@ private FirebaseAuth mFirebaseAuth;
         setContentView(R.layout.activity_splash_screen);
 
         mFirebaseAuth = FirebaseAuth.getInstance();
-
-
     }
 
     @Override
@@ -41,5 +41,4 @@ private FirebaseAuth mFirebaseAuth;
             finish();
         }
     }
-
 }

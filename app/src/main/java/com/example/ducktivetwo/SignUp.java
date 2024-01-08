@@ -11,7 +11,6 @@ import android.text.Spanned;
 import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -25,11 +24,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Objects;
+
+import Model.HelperClass;
 
 
 public class SignUp extends AppCompatActivity {
@@ -72,7 +72,6 @@ public class SignUp extends AppCompatActivity {
                 database = FirebaseDatabase.getInstance();
                 reference = database.getReference("users");
 
-
                 String username = signupUname.getText().toString().trim();
                 String email = signupEmail.getText().toString().trim();
                 String password = signupPassword.getText().toString().trim();
@@ -100,7 +99,6 @@ public class SignUp extends AppCompatActivity {
 
                                     HelperClass helperClass = new HelperClass(id, username, email, phone, password);
                                     reference.child(id).child("user_data").setValue(helperClass);
-                                    new UserProfileChangeRequest.Builder().setDisplayName(username).build();
                                 }
                                 Toast.makeText(SignUp.this, "Sign Up Successful", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(SignUp.this, LogIn.class));
@@ -114,6 +112,7 @@ public class SignUp extends AppCompatActivity {
         });
 
 
+        //When user already has an account
         String text = "Already a member? Log In";
 
         SpannableString ss = new SpannableString(text);
@@ -134,6 +133,8 @@ public class SignUp extends AppCompatActivity {
         textView.setText(ss);
         textView.setMovementMethod(LinkMovementMethod.getInstance());
     }
+
+    //Open Loginn
     public void openLogIn() {
         Intent intent1 = new Intent(this, LogIn.class);
         startActivity(intent1);
