@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Layout;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +41,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import Adapters.HabitAdapter;
 import Adapters.TaskAdapter;
@@ -49,8 +53,14 @@ import Model.TaskData;
 public class HabitsFragment extends Fragment {
 
     private FloatingActionButton habitplusfab;
+
+    private FloatingActionButton habitedtfab;
+
+
     private FloatingActionButton habitsbtn;
 
+
+    private TextView fab_edit_txt;
     private TextView fab_habits_txt;
 
     private boolean isOpen = false;
@@ -97,8 +107,12 @@ public class HabitsFragment extends Fragment {
         // Habits FAB
         habitplusfab = vvv.findViewById(R.id.habits_plus_btn);
         habitsbtn = vvv.findViewById(R.id.habits_ft_btn);
+        habitedtfab = vvv.findViewById(R.id.habitedit_ft_btn);
+
 
         fab_habits_txt = vvv.findViewById(R.id.habits_ft_text);
+        fab_edit_txt = vvv.findViewById(R.id.edithab_ft_text);
+
 
         FadeOpen = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_open);
         FadeClose = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_close);
@@ -107,20 +121,31 @@ public class HabitsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 addHabits();
+                editHabits();
+
 
                 if (isOpen) {
                     habitsbtn.startAnimation(FadeClose);
                     habitsbtn.setClickable(false);
+                    habitedtfab.startAnimation(FadeClose);
+                    habitedtfab.setClickable(false);
 
                     fab_habits_txt.startAnimation(FadeClose);
                     fab_habits_txt.setClickable(false);
+                    fab_edit_txt.startAnimation(FadeClose);
+                    fab_edit_txt.setClickable(false);
+
                     isOpen = false;
                 } else {
                     habitsbtn.startAnimation(FadeOpen);
                     habitsbtn.setClickable(true);
+                    habitedtfab.startAnimation(FadeOpen);
+                    habitedtfab.setClickable(true);
 
                     fab_habits_txt.startAnimation(FadeOpen);
                     fab_habits_txt.setClickable(true);
+                    fab_edit_txt.startAnimation(FadeOpen);
+                    fab_edit_txt.setClickable(true);
 
                     isOpen = true;
                 }
@@ -138,16 +163,33 @@ public class HabitsFragment extends Fragment {
         });
     }
 
+   private void editHabits() {
+       habitedtfab.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               habitsEditData();
+           }
+       });
+   }
+
+
     private void ftAnimation() {
         if (isOpen) {
             habitsbtn.startAnimation(FadeClose);
 
             habitsbtn.setClickable(false);
 
+            habitedtfab.startAnimation(FadeClose);
+            habitedtfab.setClickable(false);
+
 
             fab_habits_txt.startAnimation(FadeClose);
 
+
             fab_habits_txt.setClickable(false);
+
+            fab_edit_txt.startAnimation(FadeClose);
+            fab_edit_txt.setClickable(false);
 
             isOpen = false;
         } else {
@@ -155,14 +197,20 @@ public class HabitsFragment extends Fragment {
 
             habitsbtn.setClickable(true);
 
+            habitedtfab.startAnimation(FadeOpen);
+            habitedtfab.setClickable(true);
 
             fab_habits_txt.startAnimation(FadeOpen);
 
             fab_habits_txt.setClickable(true);
 
+            fab_edit_txt.startAnimation(FadeOpen);
+            fab_edit_txt.setClickable(true);
+
             isOpen = true;
         }
     }
+
 
     public void habitsDataInsert() {
         AlertDialog.Builder mydialog = new AlertDialog.Builder(getActivity());
@@ -186,6 +234,16 @@ public class HabitsFragment extends Fragment {
                 String habitName = edthabitsname.getText().toString().trim();
                 String habitDescription = edthabitsDescription.getText().toString().trim();
                 String habitTime = edthabitsTime.getText().toString().trim();
+                String habitStatus = "To Do";
+
+                String input = "24:00"; // change this line to test with different inputs
+                Pattern pattern = Pattern.compile("^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$");
+
+
+                if (!pattern.matcher(habitTime).matches()) {
+                    edthabitsTime.setError(("Required Field.."));
+                    return;
+                }
 
                 if (TextUtils.isEmpty(habitName)) {
                     edthabitsname.setError("Required Field..");
@@ -203,15 +261,15 @@ public class HabitsFragment extends Fragment {
 
                 String mDate = DateFormat.getDateInstance().format(new Date());
 
-                HabitData data1 = new HabitData(habitName, habitDescription, habitTime, mDate);
+                HabitData data1 = new HabitData(habitName, habitDescription, habitTime, mDate, habitStatus );
 
-                mHabitDatabase.child(id).setValue(data1);
+                assert id != null;
+                mHabitDatabase.child(habitName).setValue(data1);
                 Toast.makeText(getActivity(), "HABIT DATA ADDED", Toast.LENGTH_SHORT).show();
                 ftAnimation();
                 dialog.dismiss();
             }
         });
-
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -221,6 +279,86 @@ public class HabitsFragment extends Fragment {
         });
         dialog.show();
     }
+
+    public void habitsEditData() {
+        AlertDialog.Builder mydialogg = new AlertDialog.Builder(getActivity());
+        LayoutInflater inflaterr = LayoutInflater.from(getActivity());
+        View view = inflaterr.inflate(R.layout.custom_layout_for_edithabits,null);
+        mydialogg.setView(view);
+        final AlertDialog dialogg = mydialogg.create();
+
+        dialogg.setCancelable(false);
+
+        EditText edthabitname = view.findViewById(R.id.habitname_edt);
+        EditText edthabitstat = view.findViewById(R.id.statusedit_edt);
+
+        Button btnSave = view.findViewById(R.id.btnSave);
+        Button btnCancel = view.findViewById(R.id.btnCancel);
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String habitname = edthabitname.getText().toString().trim();
+                String newHabitStat = edthabitstat.getText().toString().trim();
+                boolean b = true;
+
+                Pattern pattern = Pattern.compile("^(Done|OnGoing|ToDo)$");
+
+                if(TextUtils.isEmpty(habitname)){
+                    edthabitname.setError("Required Field..");
+                    return;
+                }
+                if (!pattern.matcher(newHabitStat).matches()) {
+                    edthabitstat.setError(("Invalid Input..."));
+                    return;
+                }
+
+                if(TextUtils.isEmpty(newHabitStat)){
+                    edthabitstat.setError("Required Field..");
+                    return;
+                }
+                DatabaseReference HabitDBR =FirebaseDatabase.getInstance().getReference()
+                        .child("users")
+                        .child(Objects.requireNonNull(hAuth.getUid()))
+                        .child("Habit_Data")
+                        .child(habitname);
+
+                HabitDBR.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            // The file exists
+                            HabitDBR.child("habitStatus").setValue(newHabitStat);
+                            Toast.makeText(getActivity(), "HABIT STATUS EDITED", Toast.LENGTH_SHORT).show();
+                            ftAnimation();
+                             dialogg.dismiss();
+
+                        } else {
+                            // The file does not exist
+                            edthabitname.setError("Habit does not exist");
+                            return;
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        // Handle errors
+                        Log.println(Log.ERROR,"Database","Error");
+                    }
+                });
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ftAnimation();
+                dialogg.dismiss();
+            }
+        });
+        dialogg.show();
+    }
+
     @Override
     public void onStart(){
         super.onStart();

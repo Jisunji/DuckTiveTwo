@@ -12,6 +12,8 @@ import com.example.ducktivetwo.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 import Model.TaskData;
@@ -36,6 +38,8 @@ public class TaskAdapter extends FirebaseRecyclerAdapter<TaskData,TaskAdapter.ta
         holder.description.setText(model.getDescription());
         holder.priority.setText(model.getPriority());
         holder.date.setText(model.getDate());
+        holder.status.setText(model.getStatus());
+        holder.time.setText(model.getTime());
     }
 
     @NonNull
@@ -51,7 +55,7 @@ public class TaskAdapter extends FirebaseRecyclerAdapter<TaskData,TaskAdapter.ta
     }
 
     static class taskViewHolder extends RecyclerView.ViewHolder{
-        TextView task, category, description, priority, date;
+        TextView task, category, description, priority, date, status,time;
 
         public taskViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -61,6 +65,8 @@ public class TaskAdapter extends FirebaseRecyclerAdapter<TaskData,TaskAdapter.ta
             category = (TextView)itemView.findViewById(R.id.category_txt_tasks);
             description = (TextView) itemView.findViewById(R.id.desc_txt_tasks);
             priority = (TextView) itemView.findViewById(R.id.priority_txt_tasks);
+            status = (TextView) itemView.findViewById(R.id.status_txt_tasks);
+            time = (TextView) itemView.findViewById(R.id.time_txt_task);
 
         }
     }

@@ -13,22 +13,34 @@
         android:layout_height="100dp">
 
         <RelativeLayout
-            android:layout_width="50dp"
+            android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_weight="0">
 
             <TextView
                 android:id="@+id/date_txt_task"
-                android:layout_width="50dp"
-                android:layout_height="100dp"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
 
                 android:text="6 June 2023"
                 android:textAppearance="?android:textAppearanceSmall"
                 android:textColor="@color/date_color"
                 android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/time_txt_task"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="50dp"
+                android:text=""
+                android:textAppearance="?android:textAppearanceSmall"
+                android:textColor="@color/date_color"
+                android:textStyle="bold" />
+
 
         </RelativeLayout>
+
+
 
         <RelativeLayout
             android:layout_width="50dp"
@@ -79,11 +91,22 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="40dp"
                 android:text="Category"
                 android:textAppearance="?android:textAppearanceSmall"
                 android:textStyle="bold"
                 android:id="@+id/category_txt_tasks"
+                android:layout_below="@id/priority_txt_tasks"
+                android:textColor="@android:color/black"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="40dp"
+                android:text="Status"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:textStyle="bold"
+                android:id="@+id/status_txt_tasks"
                 android:layout_below="@id/priority_txt_tasks"
                 android:textColor="@android:color/black"/>
 

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -159,6 +160,85 @@ public class TasksFragment extends Fragment {
         });
     }
 
+    public void TasksEditData() {
+        AlertDialog.Builder mydialogg = new AlertDialog.Builder(getActivity());
+        LayoutInflater inflaterr = LayoutInflater.from(getActivity());
+        View view = inflaterr.inflate(R.layout.custom_layout_for_edithabits,null);
+        mydialogg.setView(view);
+        final AlertDialog dialogg = mydialogg.create();
+
+        dialogg.setCancelable(false);
+
+        EditText edthabittaskname = view.findViewById(R.id.habitname_edt);
+        EditText edtedit = view.findViewById(R.id.statusedit_edt);
+
+        Button btnSave = view.findViewById(R.id.btnSave);
+        Button btnCancel = view.findViewById(R.id.btnCancel);
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String habittaskname = edthabittaskname.getText().toString().trim();
+                String edittask = edtedit.getText().toString().trim();
+                boolean b = true;
+
+                Pattern pattern = Pattern.compile("^(Done|OnGoing|ToDo)$");
+
+                if(TextUtils.isEmpty(habittaskname)){
+                    edthabittaskname.setError("Required Field..");
+                    return;
+                }
+                if (!pattern.matcher(edittask).matches()) {
+                    edtedit.setError(("Invalid Input..."));
+                    return;
+                }
+
+                if(TextUtils.isEmpty(edittask)){
+                    edtedit.setError("Required Field..");
+                    return;
+                }
+                DatabaseReference HabitDBR =FirebaseDatabase.getInstance().getReference()
+                        .child("users")
+                        .child(Objects.requireNonNull(tAuth.getUid()))
+                        .child("Task_Data")
+                        .child(habittaskname);
+
+                HabitDBR.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            // The file exists
+                            HabitDBR.child("habitStatus").setValue(edittask);
+                            Toast.makeText(getActivity(), "HABIT STATUS EDITED", Toast.LENGTH_SHORT).show();
+                            ftAnimation();
+                            dialogg.dismiss();
+
+                        } else {
+                            // The file does not exist
+                            edthabittaskname.setError("Habit does not exist");
+                            return;
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        // Handle errors
+                        Log.println(Log.ERROR,"Database","Error");
+                    }
+                });
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ftAnimation();
+                dialogg.dismiss();
+            }
+        });
+        dialogg.show();
+    }
+
     public void taskDataInsert() {
         AlertDialog.Builder mydialog = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = LayoutInflater.from(getActivity());
@@ -175,6 +255,9 @@ public class TasksFragment extends Fragment {
         EditText edtCategory = myview.findViewById(R.id.category_edt);
         EditText edtDescription = myview.findViewById(R.id.description_edt);
         EditText edtPriority = myview.findViewById(R.id.priority_edt);
+        EditText edtEditDate = myview.findViewById(R.id.editTextDate);
+        EditText edtTime = myview.findViewById(R.id.time_edt);
+
 
         Button btnSave = myview.findViewById(R.id.btnSave);
         Button btnCancel = myview.findViewById(R.id.btnCancel);
@@ -186,6 +269,9 @@ public class TasksFragment extends Fragment {
                 String category = edtCategory.getText().toString().trim();
                 String taskName = edtTaskName.getText().toString().trim();
                 String description = edtDescription.getText().toString().trim();
+                String edit = edtEditDate.getText().toString().trim();
+                String time = edtTime.getText().toString().trim();
+
 
                 if (TextUtils.isEmpty(priority)) {
                     edtPriority.setError(("Require input High, Medium, Low Priority.."));
@@ -194,6 +280,19 @@ public class TasksFragment extends Fragment {
 
                 // Create a regex pattern
                 Pattern pattern = Pattern.compile("^(Low|Medium|High)$");
+
+                Pattern patternn = Pattern.compile("^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$");
+
+
+                if (!patternn.matcher(time).matches()) {
+                    edtTime.setError(("Required Field.."));
+                    return;
+                }
+
+                if (TextUtils.isEmpty(edit)) {
+                    edtEditDate.setError(("Require input.."));
+                    return;
+                }
 
                 if (!pattern.matcher(priority).matches()) {
                     edtPriority.setError(("Input High, Medium, Low Priority"));
@@ -216,9 +315,11 @@ public class TasksFragment extends Fragment {
                 }
                 String id = mTaskDatabase.push().getKey();
 
-                String mDate = DateFormat.getDateInstance().format(new Date());
+                //String mDate = DateFormat.getDateInstance().format(new Date());
 
-                TaskData data1 = new TaskData(taskName, category, description, priority, mDate);
+                String status = "To Do";
+
+                TaskData data1 = new TaskData(taskName, category, description, priority, edit, status, time);
 
                 mTaskDatabase.child(id).setValue(data1);
                 Toast.makeText(getActivity(), "TASK DATA ADDED", Toast.LENGTH_SHORT).show();

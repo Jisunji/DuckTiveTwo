@@ -7,12 +7,17 @@ public class TaskData {
     private String priority;
     private String date;
     private String id;
-    public TaskData(String task, String category, String description, String priority, String date) {
+    private String status;
+
+    private String time;
+    public TaskData(String task, String category, String description, String priority, String date, String status, String time) {
         this.task = task;
         this.category = category;
         this.description = description;
         this.priority = priority;
         this.date = date;
+        this.status = status;
+        this.time = time;
     }
 
     public String getDate() {
@@ -53,6 +58,22 @@ public class TaskData {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public TaskData(){

@@ -5,12 +5,14 @@ public class HabitData {
     private String habitDescription;
     private String habitTime;
     private String habitDate;
+    private String habitStatus;
 
-    public HabitData(String habitName, String habitDescription, String habitTime, String habitDate) {
+    public HabitData(String habitName, String habitDescription, String habitTime, String habitDate, String habitStatus) {
         this.habitName = habitName;
         this.habitDescription = habitDescription;
         this.habitTime = habitTime;
         this.habitDate = habitDate;
+        this.habitStatus = habitStatus;
 
     }
 
@@ -41,6 +43,8 @@ public class HabitData {
     public String getHabitDescription() {
         return habitDescription;
     }
+    public String getHabitStatus(){ return habitStatus; }
+    public void setHabitStatus(String habitStatus){ this.habitStatus = habitStatus;}
 
     public void setHabitDescription(String habitDescription) {
         this.habitDescription = habitDescription;

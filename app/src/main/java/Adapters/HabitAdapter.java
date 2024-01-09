@@ -35,6 +35,7 @@ public class HabitAdapter extends FirebaseRecyclerAdapter<HabitData,HabitAdapter
         holder.description.setText(model.getHabitDescription());
         holder.time.setText(model.getHabitTime());
         holder.date.setText(model.getHabitDate());
+        holder.status.setText(model.getHabitStatus());
     }
 
     @NonNull
@@ -50,7 +51,7 @@ public class HabitAdapter extends FirebaseRecyclerAdapter<HabitData,HabitAdapter
     }
 
     static class habitViewHolder extends RecyclerView.ViewHolder{
-        TextView habit, description, time, date;
+        TextView habit, description, time, date, status;
 
         public habitViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -59,6 +60,7 @@ public class HabitAdapter extends FirebaseRecyclerAdapter<HabitData,HabitAdapter
             description = itemView.findViewById(R.id.desc_txt_habits);
             time = itemView.findViewById(R.id.time_txt_habits);
             date = itemView.findViewById(R.id.date_txt_habits);
+            status = itemView.findViewById(R.id.status_txt_habits);
 
         }
     }

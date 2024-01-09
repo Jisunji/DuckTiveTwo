@@ -13,28 +13,217 @@
         android:layout_gravity="center"
         android:src="@drawable/duck1" />
 
-    <Button
-        android:id="@+id/button1"
+    <TextView
+        android:id="@+id/textView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="end|top"
-        android:layout_marginTop="30dp"
-        android:text="Button 1" />
+        android:layout_marginStart="155dp"
+        android:layout_marginTop="44dp"
+        android:text="DuckTive"
+        android:textColor="@color/black"
+        android:textSize="60px"
+        android:textStyle="bold|italic"
+         />
 
-    <Button
-        android:id="@+id/button2"
+    <TextView
+        android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="end|top"
-        android:layout_marginTop="80dp"
-        android:text="Button 2" />
+        android:layout_marginBottom="28dp"
+        android:text="DuckTive Companion"
+        android:textColor="@color/black"
+        android:textSize="60px"
+        android:textStyle="bold|italic"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="120dp"
+         />
 
-    <Button
-        android:id="@+id/button3"
+    <TextView
+        android:id="@+id/textView19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="end|top"
-        android:layout_marginTop="130dp"
-        android:text="Button 3" />
+        android:layout_marginTop="500dp"
+        android:layout_marginLeft="130dp"
+        android:text="Duke the Duck"
+        android:textColor="@color/black"
+        android:textSize="60px"
+        android:textStyle="bold|italic"
 
+         />
+
+    <Button
+        android:id="@+id/achievement_btn"
+        android:layout_width="151dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="550dp"
+        android:layout_marginLeft="130dp"
+        android:text="Achievement"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView19" />
+    <!--
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|top"
+            android:layout_marginTop="30dp"
+            android:text="Button 1" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|top"
+            android:layout_marginTop="80dp"
+            android:text="Button 2" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|top"
+            android:layout_marginTop="130dp"
+            android:text="Button 3" />
+
+       <!- <Button
+            android:id="@+id/backbtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:textSize="20dp"
+            android:text="<"/>
+
+
+    -->
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:id="@+id/fabb_plus_btn"
+        android:layout_gravity="top|end"
+        android:layout_marginBottom="105dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="160dp"
+        android:backgroundTint="@color/lavender"
+
+        android:src="@drawable/baseline_add"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_gravity="top|end"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="180dp"
+        android:layout_marginTop="220dp"
+        android:layout_height="wrap_content"
+        android:translationZ="90dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Default"
+            android:id="@+id/button1_ft_text"
+            android:textColor="@color/black"
+            android:padding="5dp"
+            android:background="@color/white"
+            android:layout_gravity="center"
+            android:layout_marginRight="5dp"
+            android:visibility="invisible"
+            android:textAppearance="?android:textAppearanceSmall"
+            />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/button1"
+            android:layout_gravity="bottom|end"
+            android:backgroundTint="@color/lavender"
+            android:elevation="6dp"
+            app:fabSize="mini"
+            android:visibility="invisible"
+            android:background="@color/lavender"
+            android:src="@drawable/edittt"
+
+
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_gravity="top|end"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="180dp"
+        android:layout_marginTop="260dp"
+        android:layout_height="wrap_content"
+        android:translationZ="90dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Design 1"
+            android:id="@+id/button2_ft_text"
+            android:textColor="@color/black"
+            android:padding="5dp"
+            android:background="@color/white"
+            android:layout_gravity="center"
+            android:layout_marginRight="5dp"
+            android:visibility="invisible"
+            android:textAppearance="?android:textAppearanceSmall"
+            />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/button2"
+            android:layout_gravity="bottom|end"
+            android:backgroundTint="@color/lavender"
+            android:elevation="6dp"
+            app:fabSize="mini"
+            android:visibility="invisible"
+            android:src="@drawable/edittt"
+
+
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_gravity="top|end"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="170dp"
+        android:layout_marginTop="300dp"
+        android:layout_height="wrap_content"
+        android:translationZ="90dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Design 2"
+            android:id="@+id/button3_txt"
+            android:textColor="@color/black"
+            android:padding="5dp"
+            android:background="@color/white"
+            android:layout_gravity="center"
+            android:layout_marginRight="5dp"
+            android:visibility="invisible"
+            android:textAppearance="?android:textAppearanceSmall"
+            />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/btn3"
+            android:layout_gravity="bottom|end"
+            android:backgroundTint="@color/lavender"
+            android:elevation="6dp"
+            app:fabSize="mini"
+            android:visibility="invisible"
+            android:src="@drawable/edittt"
+
+
+
+            />
+
+    </LinearLayout>
 </FrameLayout>

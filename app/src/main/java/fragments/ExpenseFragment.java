@@ -1,6 +1,8 @@
 package fragments;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,14 +11,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.ducktivetwo.R;
@@ -32,9 +37,11 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 import Adapters.MyAdapter;
 import Model.Data;
@@ -160,7 +167,7 @@ public class ExpenseFragment extends Fragment {
                     Toast.makeText(getActivity(), "Nearing expense threshold", Toast.LENGTH_SHORT).show();
                 } else if ((totalsum == Long.parseLong(threshold.getText().toString()))) {
                     Toast.makeText(getActivity(), "Reached expense threshold", Toast.LENGTH_SHORT).show();
-                } else if ((totalsum > Long.parseLong(threshold.getText().toString()))) {
+                } else if (totalsum > Long.parseLong(threshold.getText().toString())) {
                     Toast.makeText(getActivity(), "Exceeded expense threshold", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -229,6 +236,10 @@ public class ExpenseFragment extends Fragment {
             String tmType = type.getText().toString().trim();
             String tmNote = note.getText().toString().trim();
 
+            Pattern pattern = Pattern.compile("^(Investment|Loan|Leisure|Medical|Transport)$");
+
+
+
             if(TextUtils.isEmpty(tmAmount)){
                 amount.setError("Required field...");
                 return;
@@ -239,6 +250,12 @@ public class ExpenseFragment extends Fragment {
                 type.setError("Required field...");
                 return;
             }
+
+            if (!pattern.matcher(tmType).matches()) {
+                type.setError(("Required field.."));
+                return;
+            }
+
             if(TextUtils.isEmpty(tmNote)){
                 note.setError("Required field...");
                 return;
@@ -365,5 +382,7 @@ public class ExpenseFragment extends Fragment {
 
 
     }
+
+
 
 }
