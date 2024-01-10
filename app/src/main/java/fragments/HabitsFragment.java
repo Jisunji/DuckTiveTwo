@@ -1,6 +1,12 @@
 package fragments;
 
+import static android.content.Context.ALARM_SERVICE;
+
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,7 +14,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.Layout;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,7 +28,6 @@ import android.widget.Toast;
 
 import com.example.ducktivetwo.R;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -32,22 +36,20 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.ktx.Firebase;
-
-import org.w3c.dom.Text;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import Adapters.HabitAdapter;
-import Adapters.TaskAdapter;
+
+import com.example.ducktivetwo.HabitsAlarmReceiver;
 import Model.HabitData;
-import Model.TaskData;
+
 
 
 public class HabitsFragment extends Fragment {
@@ -266,8 +268,12 @@ public class HabitsFragment extends Fragment {
                 assert id != null;
                 mHabitDatabase.child(habitName).setValue(data1);
                 Toast.makeText(getActivity(), "HABIT DATA ADDED", Toast.LENGTH_SHORT).show();
+
                 ftAnimation();
                 dialog.dismiss();
+
+                scheduleAlarms();
+
             }
         });
         btnCancel.setOnClickListener(new View.OnClickListener() {
@@ -279,6 +285,100 @@ public class HabitsFragment extends Fragment {
         });
         dialog.show();
     }
+
+
+
+    public void scheduleAlarms() {
+
+        String userUid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+
+        DatabaseReference habitDataRef = FirebaseDatabase.getInstance().getReference()
+                .child("users")
+                .child(userUid)
+                .child("Habit_Data");
+
+
+        habitDataRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+
+
+                int requestCodeCounter = 0;
+
+                for (DataSnapshot habitSnapshot : dataSnapshot.getChildren()) {
+
+                    HabitData habitData = habitSnapshot.getValue(HabitData.class);
+
+Log.d("Habit Time ", String.valueOf(habitData.getHabitTime()));
+                    if (habitData != null && habitData.getHabitTime() != null && !habitData.getHabitTime().isEmpty()) {
+
+                        String habitTime = habitData.getHabitTime();
+                        String[] timeComponents = habitTime.split(":");
+
+                        if (timeComponents.length == 2) {
+                            int hours = Integer.parseInt(timeComponents[0]);
+                            int minutes = Integer.parseInt(timeComponents[1]);
+
+
+                            Calendar habitTimeCalendar = Calendar.getInstance();
+                            habitTimeCalendar.set(Calendar.HOUR_OF_DAY, hours);
+                            habitTimeCalendar.set(Calendar.MINUTE, minutes);
+                            habitTimeCalendar.set(Calendar.SECOND, 0);
+
+                            long habitTimeMillis = habitTimeCalendar.getTimeInMillis();
+
+                            int requestCodeExact = requestCodeCounter++;
+                            long currentTimeMillis = System.currentTimeMillis();
+
+                            if (habitTimeMillis <= currentTimeMillis) {
+                                // The calculated time is in the past. Adjust the time or handle accordingly.
+                                Log.d("MyApp", "Scheduled time is in the past.");
+                            } else {
+                                // Proceed with scheduling the notification.
+                                scheduleNotification(getContext(), habitTimeMillis, "Habit Title - "+ habitData.getHabitName(), requestCodeExact);
+                            }
+
+
+
+                        }
+                    }
+                }
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Handle errors, if any
+            }
+        });
+    }
+
+    private void scheduleNotification(Context context, long timeInMillis, String title, int requestCode) {
+
+
+
+        Intent notificationIntentExact = new Intent(context, HabitsAlarmReceiver.class);
+        notificationIntentExact.setAction("ACTION_EXACT");
+        notificationIntentExact.putExtra("title", title);
+        notificationIntentExact.putExtra("message", " Time is up!");
+
+        // Use different request codes for each PendingIntent
+        PendingIntent pendingIntentExact = PendingIntent.getBroadcast(context, requestCode + 1, notificationIntentExact, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
+
+        if (alarmManager != null) {
+            // Schedule alarm at the exact habitTime
+            alarmManager.set(AlarmManager.RTC_WAKEUP, timeInMillis, pendingIntentExact);
+        }
+
+
+    }
+
+
+
+
 
     public void habitsEditData() {
         AlertDialog.Builder mydialogg = new AlertDialog.Builder(getActivity());

@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.ducktivetwo.ExpenseNotificationHelper;
 import com.example.ducktivetwo.R;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -72,6 +73,11 @@ public class ExpenseFragment extends Fragment {
 
     //Dashboard expense result..
     private TextView totalExpenseResult;
+
+    //channel for notif
+    private static final String CHANNEL_ID = "expense_channel";
+    private static final String CHANNEL_NAME = "Expense Channel";
+    private static final int NOTIFICATION_ID = 1;
 
     RecyclerView recyclerView;
     MyAdapter myAdapter;
@@ -272,6 +278,7 @@ public class ExpenseFragment extends Fragment {
             Toast.makeText(getActivity(), "EXPENSE DATA ADDED", Toast.LENGTH_SHORT).show();
             ftAnimation();
             dialog.dismiss();
+
         });
 
         btnCancel.setOnClickListener(v -> {
@@ -308,6 +315,8 @@ public class ExpenseFragment extends Fragment {
             int inamount = Integer.parseInt(Thamount);
             mThresholdDatabase.setValue(inamount);
             Toast.makeText(getActivity(), "THRESHOLD DATA ADDED", Toast.LENGTH_SHORT).show();
+            ExpenseNotificationHelper.scheduleExpenseNotificationAlarm(v.getContext());
+
             ftAnimation();
             dialog.dismiss();
         });

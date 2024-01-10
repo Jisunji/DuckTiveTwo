@@ -1,6 +1,12 @@
 package fragments;
 
+import static android.content.Context.ALARM_SERVICE;
+
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,6 +26,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ducktivetwo.HabitsAlarmReceiver;
 import com.example.ducktivetwo.R;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -33,13 +40,16 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
 import Adapters.TaskAdapter;
+import Model.HabitData;
 import Model.TaskData;
+
 
 public class TasksFragment extends Fragment {
     private FloatingActionButton fabplusfab;
@@ -239,6 +249,98 @@ public class TasksFragment extends Fragment {
         dialogg.show();
     }
 
+
+    public void scheduleAlarmsTasks() {
+
+        String userUid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+
+        DatabaseReference habitDataRef = FirebaseDatabase.getInstance().getReference()
+                .child("users")
+                .child(userUid)
+                .child("Task_Data");
+
+
+        habitDataRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+
+
+                int requestCodeCounterTask = 0;
+
+                for (DataSnapshot habitSnapshot : dataSnapshot.getChildren()) {
+
+                    TaskData taskData = habitSnapshot.getValue(TaskData.class);
+
+                    Log.d("Habit Time ", String.valueOf(taskData.getTime()));
+                    if (taskData != null && taskData.getTime() != null && !taskData.getTime().isEmpty()) {
+
+                        String taskTime = taskData.getTime();
+                        String[] timeComponents = taskTime.split(":");
+
+                        if (timeComponents.length == 2) {
+                            int hours = Integer.parseInt(timeComponents[0]);
+                            int minutes = Integer.parseInt(timeComponents[1]);
+
+
+                            Calendar taskTimeCalendar = Calendar.getInstance();
+                            taskTimeCalendar.set(Calendar.HOUR_OF_DAY, hours);
+                            taskTimeCalendar.set(Calendar.MINUTE, minutes);
+                            taskTimeCalendar.set(Calendar.SECOND, 0);
+
+                            long taskTimeMillis = taskTimeCalendar.getTimeInMillis();
+                            Log.d("Scheduled Time", "Millis: " + taskTimeMillis + ", Time: " + new Date(taskTimeMillis));
+
+                            int requestCodeExactTask = requestCodeCounterTask++;
+                            Log.d("requestCodeExact", "requestCodeExact: " + requestCodeExactTask);
+
+                            long currentTimeMillis = System.currentTimeMillis();
+
+                            if (taskTimeMillis <= currentTimeMillis) {
+                                // The calculated time is in the past. Adjust the time or handle accordingly.
+                                Log.d("MyApp", "Scheduled time is in the past.");
+                            } else {
+                                // Proceed with scheduling the notification.
+                                scheduleNotificationTasks(getContext(), taskTimeMillis, "Task Title - " + taskData.getCategory(), requestCodeExactTask);
+                            }
+                        }
+                    }
+                }
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Handle errors, if any
+            }
+        });
+    }
+
+    private void scheduleNotificationTasks(Context context, long timeInMillis, String title, int requestCode) {
+
+
+
+        Intent notificationIntentExact = new Intent(context, HabitsAlarmReceiver.class);
+        notificationIntentExact.setAction("ACTION_EXACT");
+        notificationIntentExact.putExtra("title", title);
+        notificationIntentExact.putExtra("message", " Time is up!");
+
+
+        PendingIntent pendingIntentExact = PendingIntent.getBroadcast(context, requestCode + 1, notificationIntentExact, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
+
+        if (alarmManager != null) {
+
+            alarmManager.set(AlarmManager.RTC_WAKEUP, timeInMillis, pendingIntentExact);
+        }
+
+
+    }
+
+
+
+
     public void taskDataInsert() {
         AlertDialog.Builder mydialog = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = LayoutInflater.from(getActivity());
@@ -325,6 +427,9 @@ public class TasksFragment extends Fragment {
                 Toast.makeText(getActivity(), "TASK DATA ADDED", Toast.LENGTH_SHORT).show();
                 ftAnimation();
                 dialog.dismiss();
+
+
+                scheduleAlarmsTasks();
             }
         });
         btnCancel.setOnClickListener(new View.OnClickListener() {
