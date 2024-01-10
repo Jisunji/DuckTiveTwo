@@ -1,6 +1,7 @@
 package fragments;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ducktivetwo.R;
+import com.example.ducktivetwo.tasks_history;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,26 +33,33 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
 import Adapters.TaskAdapter;
-import Model.TaskData;
+import Model.TaskHistoryData;
 
 public class TasksFragment extends Fragment {
     private FloatingActionButton fabplusfab;
     private FloatingActionButton fabcreatetasks;
-    private DatabaseReference mTaskDatabase;
+
+    private FloatingActionButton edittask;
+
+    private FloatingActionButton history_btn;
+
+    private DatabaseReference mTaskDatabase,historyDBR;
     private FirebaseAuth tAuth;
 
     RecyclerView taskRecyclerView;
     TaskAdapter taskAdapter;
 
     private TextView fab_tasks1_txt;
+
+    private TextView history_txt;
+
+    private TextView edittask_txt;
 
 
     //boolean
@@ -66,14 +75,15 @@ public class TasksFragment extends Fragment {
                              Bundle savedInstanceState) {
         tAuth = FirebaseAuth.getInstance();
 
+
         View vv = inflater.inflate(R.layout.fragment_tasks, container, false);
         taskRecyclerView = vv.findViewById(R.id.taskrcv);
         taskRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        FirebaseRecyclerOptions<TaskData> options =
-                new FirebaseRecyclerOptions.Builder<TaskData>()
+        FirebaseRecyclerOptions<TaskHistoryData> options =
+                new FirebaseRecyclerOptions.Builder<TaskHistoryData>()
                         .setQuery(FirebaseDatabase.getInstance().getReference().child("users")
-                                .child(Objects.requireNonNull(tAuth.getCurrentUser()).getUid()).child("Task_Data"), TaskData.class)
+                                .child(Objects.requireNonNull(tAuth.getCurrentUser()).getUid()).child("Task_Data"), TaskHistoryData.class)
                         .build();
         taskAdapter = new TaskAdapter(options);
         taskRecyclerView.setAdapter(taskAdapter);
@@ -82,8 +92,22 @@ public class TasksFragment extends Fragment {
         FirebaseUser nUser= tAuth.getCurrentUser();
         if(nUser != null) {
             String uid=nUser.getUid();
-            mTaskDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("Task_Data");
+            mTaskDatabase = FirebaseDatabase.getInstance().getReference()
+                    .child("users")
+                    .child(uid)
+                    .child("Task_Data");
+
+            historyDBR = FirebaseDatabase.getInstance().getReference()
+                    .child("users")
+                    .child(uid)
+                    .child("Tasks_Completed");
+
+            //moveDoneTasks();
+            listenForDataChanges();
         }
+
+
+
 
 
 
@@ -92,8 +116,12 @@ public class TasksFragment extends Fragment {
 
         fabplusfab = vv.findViewById(R.id.tasks_plus_btn);
         fabcreatetasks = vv.findViewById(R.id.tasks1_ft_btn);
+        edittask = vv.findViewById(R.id.taskedit_ft_btn);
+        history_btn = vv.findViewById(R.id.taskhistory_ft_btn);
 
         fab_tasks1_txt = vv.findViewById(R.id.tasks1_ft_text);
+        edittask_txt = vv.findViewById(R.id.edittask_ft_text);
+        history_txt = vv.findViewById(R.id.taskhistory_ft_text);
 
         FadeOpen = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_open);
         FadeClose = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_close);
@@ -102,19 +130,42 @@ public class TasksFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 addData();
+                editTasks();
+                TaskHistory();
+
                 if (isOpen) {
                     fabcreatetasks.startAnimation(FadeClose);
                     fabcreatetasks.setClickable(false);
+                    edittask.startAnimation(FadeClose);
+                    edittask.setClickable(false);
+                    history_btn.startAnimation(FadeClose);
+                    history_btn.setClickable(false);
+
 
                     fab_tasks1_txt.startAnimation(FadeClose);
                     fab_tasks1_txt.setClickable(false);
+                    edittask_txt.startAnimation(FadeClose);
+                    edittask_txt.setClickable(false);
+                    history_txt.startAnimation(FadeClose);
+                    history_txt.setClickable(false);
+
                     isOpen = false;
                 } else {
+
                     fabcreatetasks.startAnimation(FadeOpen);
                     fabcreatetasks.setClickable(true);
+                    edittask.startAnimation(FadeOpen);
+                    edittask.setClickable(true);
+                    history_btn.startAnimation(FadeOpen);
+                    history_btn.setClickable(true);
 
                     fab_tasks1_txt.startAnimation(FadeOpen);
                     fab_tasks1_txt.setClickable(true);
+                    edittask_txt.startAnimation(FadeOpen);
+                    edittask_txt.setClickable(true);
+                    history_txt.startAnimation(FadeOpen);
+                    history_txt.setClickable(true);
+
 
                     isOpen = true;
                 }
@@ -126,24 +177,38 @@ public class TasksFragment extends Fragment {
     private void ftAnimation() {
         if (isOpen) {
             fabcreatetasks.startAnimation(FadeClose);
-
             fabcreatetasks.setClickable(false);
-
+            edittask.startAnimation(FadeClose);
+            edittask.setClickable(false);
+            history_btn.startAnimation(FadeClose);
+            history_btn.setClickable(false);
 
             fab_tasks1_txt.startAnimation(FadeClose);
-
             fab_tasks1_txt.setClickable(false);
+            edittask_txt.startAnimation(FadeClose);
+            edittask_txt.setClickable(false);
+            history_txt.startAnimation(FadeClose);
+            history_txt.setClickable(false);
 
             isOpen = false;
         } else {
             fabcreatetasks.startAnimation(FadeOpen);
-
             fabcreatetasks.setClickable(true);
 
+            edittask.startAnimation(FadeOpen);
+            edittask.setClickable(true);
+
+            history_btn.startAnimation(FadeOpen);
+            history_btn.setClickable(true);
 
             fab_tasks1_txt.startAnimation(FadeOpen);
-
             fab_tasks1_txt.setClickable(true);
+
+            edittask_txt.startAnimation(FadeOpen);
+            edittask_txt.setClickable(true);
+
+            history_txt.startAnimation(FadeOpen);
+            history_txt.setClickable(true);
 
             isOpen = true;
         }
@@ -160,17 +225,35 @@ public class TasksFragment extends Fragment {
         });
     }
 
+    private void editTasks() {
+        edittask.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TasksEditData();
+            }
+        });
+    }
+
+    private void TaskHistory() {
+        history_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                taskHistory();
+            }
+        });
+    }
+
     public void TasksEditData() {
         AlertDialog.Builder mydialogg = new AlertDialog.Builder(getActivity());
         LayoutInflater inflaterr = LayoutInflater.from(getActivity());
-        View view = inflaterr.inflate(R.layout.custom_layout_for_edithabits,null);
+        View view = inflaterr.inflate(R.layout.custom_layout_for_edittask,null);
         mydialogg.setView(view);
         final AlertDialog dialogg = mydialogg.create();
 
         dialogg.setCancelable(false);
 
-        EditText edthabittaskname = view.findViewById(R.id.habitname_edt);
-        EditText edtedit = view.findViewById(R.id.statusedit_edt);
+        EditText edtTaskName = view.findViewById(R.id.taskname_edt);
+        EditText edtTaskStat = view.findViewById(R.id.statustask_edt);
 
         Button btnSave = view.findViewById(R.id.btnSave);
         Button btnCancel = view.findViewById(R.id.btnCancel);
@@ -178,44 +261,44 @@ public class TasksFragment extends Fragment {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String habittaskname = edthabittaskname.getText().toString().trim();
-                String edittask = edtedit.getText().toString().trim();
+                String taskName = edtTaskName.getText().toString().trim();
+                String newTaskStat = edtTaskStat.getText().toString().trim();
                 boolean b = true;
 
-                Pattern pattern = Pattern.compile("^(Done|OnGoing|ToDo)$");
+                Pattern pattern = Pattern.compile("^(Done|OnGoing|ToDo|Missed)$");
 
-                if(TextUtils.isEmpty(habittaskname)){
-                    edthabittaskname.setError("Required Field..");
+                if(TextUtils.isEmpty(taskName)){
+                    edtTaskName.setError("Required Field..");
                     return;
                 }
-                if (!pattern.matcher(edittask).matches()) {
-                    edtedit.setError(("Invalid Input..."));
+                if (!pattern.matcher(newTaskStat).matches()) {
+                    edtTaskStat.setError(("Invalid Input..."));
                     return;
                 }
 
-                if(TextUtils.isEmpty(edittask)){
-                    edtedit.setError("Required Field..");
+                if(TextUtils.isEmpty(newTaskStat)){
+                    edtTaskStat.setError("Required Field..");
                     return;
                 }
-                DatabaseReference HabitDBR =FirebaseDatabase.getInstance().getReference()
+                DatabaseReference TaskDBR =FirebaseDatabase.getInstance().getReference()
                         .child("users")
                         .child(Objects.requireNonNull(tAuth.getUid()))
                         .child("Task_Data")
-                        .child(habittaskname);
+                        .child(taskName);
 
-                HabitDBR.addValueEventListener(new ValueEventListener() {
+                TaskDBR.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
                             // The file exists
-                            HabitDBR.child("habitStatus").setValue(edittask);
-                            Toast.makeText(getActivity(), "HABIT STATUS EDITED", Toast.LENGTH_SHORT).show();
+                            TaskDBR.child("status").setValue(newTaskStat);
+                            Toast.makeText(getActivity(), "TASK STATUS EDITED", Toast.LENGTH_SHORT).show();
                             ftAnimation();
                             dialogg.dismiss();
 
                         } else {
                             // The file does not exist
-                            edthabittaskname.setError("Habit does not exist");
+                            edtTaskName.setError("Task does not exist");
                             return;
                         }
                     }
@@ -315,13 +398,11 @@ public class TasksFragment extends Fragment {
                 }
                 String id = mTaskDatabase.push().getKey();
 
-                //String mDate = DateFormat.getDateInstance().format(new Date());
-
                 String status = "To Do";
 
-                TaskData data1 = new TaskData(taskName, category, description, priority, edit, status, time);
+                TaskHistoryData data1 = new TaskHistoryData(taskName, category, description, priority, edit, status, time);
 
-                mTaskDatabase.child(id).setValue(data1);
+                mTaskDatabase.child(taskName).setValue(data1);
                 Toast.makeText(getActivity(), "TASK DATA ADDED", Toast.LENGTH_SHORT).show();
                 ftAnimation();
                 dialog.dismiss();
@@ -337,6 +418,18 @@ public class TasksFragment extends Fragment {
         dialog.show();
 
     }
+
+    public void taskHistory(){
+        history_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), tasks_history.class));
+
+
+            }
+        });
+    }
+
     @Override
     public void onStart(){
         super.onStart();
@@ -353,9 +446,9 @@ public class TasksFragment extends Fragment {
         yourDataNodeRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                List<TaskData> dataList = new ArrayList<>();
+                List<TaskHistoryData> dataList = new ArrayList<>();
                 for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
-                    TaskData data = childSnapshot.getValue(TaskData.class);
+                    TaskHistoryData data = childSnapshot.getValue(TaskHistoryData.class);
                     if (data != null) {
                         dataList.add(data);
                     }
@@ -366,6 +459,42 @@ public class TasksFragment extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 // Handle error
+            }
+        });
+    }
+
+    private void checkGrandchild(DataSnapshot snapshot) {
+        DatabaseReference newDestination = FirebaseDatabase.getInstance().getReference()
+                .child("users")
+                .child(tAuth.getCurrentUser().getUid())
+                .child("Tasks_Done");
+
+        for (DataSnapshot child : snapshot.getChildren()) {
+            if (child.child("status").getValue() != null && child.child("status").getValue().equals("Done")) {
+                // The condition is met, perform the desired action here.
+                System.out.println("The grandchild node contains an object with the key 'status' and a string value of 'done'.");
+
+                newDestination.child(Objects.requireNonNull(child.getKey())).setValue(child.getValue());
+                child.getRef().removeValue();
+            }
+        }
+    }
+    private void listenForDataChanges() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("users")
+                .child(tAuth.getCurrentUser().getUid())
+                .child("Task_Data");
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                checkGrandchild(dataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                System.out.println("Failed to read value." + error.toException());
             }
         });
     }

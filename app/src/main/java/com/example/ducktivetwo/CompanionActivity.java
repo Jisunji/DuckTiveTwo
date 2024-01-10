@@ -1,5 +1,6 @@
 package com.example.ducktivetwo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.transition.Fade;
 import android.view.View;
@@ -29,7 +30,7 @@ import Model.AchievementsModel;
 public class CompanionActivity extends AppCompatActivity {
 
     private ImageView imageView;
-
+    private Button btnAchievement,btnBack;
     private FloatingActionButton fab_plus_btn;
     private FloatingActionButton button1, button2, button3;
 
@@ -59,7 +60,9 @@ public class CompanionActivity extends AppCompatActivity {
         button1 = findViewById(R.id.button1);
         button2 = findViewById(R.id.button2);
         button3 = findViewById(R.id.btn3);
-       // button4 = findViewById(R.id.backbtn);
+        btnAchievement = findViewById(R.id.achievement_btn);
+        btnBack = findViewById(R.id.btnBack);
+
 
         //Achievement 1
         AchievementsModel aModel = new AchievementsModel(true, true);
@@ -78,37 +81,25 @@ public class CompanionActivity extends AppCompatActivity {
         checkFileExists("Achievement2",button2);
         checkFileExists("Achievement3",button3);
 
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(CompanionActivity.this, MainActivity2.class));
+            }
+        });
+        btnAchievement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(CompanionActivity.this, Achievements.class));
+            }
+        });
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 changeImage(button1);
             }
         });
-
-        /*
-        button2.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                changeImage(button2);
-            }
-        });
-*/
-/*
-        button3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                changeImage(button3);
-            }
-        }); */
-/*   button4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
- */
 
         fab_plus_btn = findViewById(R.id.fabb_plus_btn);
 

@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.Layout;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,7 +22,6 @@ import android.widget.Toast;
 
 import com.example.ducktivetwo.R;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -32,22 +30,16 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.ktx.Firebase;
-
-import org.w3c.dom.Text;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import Adapters.HabitAdapter;
-import Adapters.TaskAdapter;
 import Model.HabitData;
-import Model.TaskData;
 
 
 public class HabitsFragment extends Fragment {
@@ -184,8 +176,6 @@ public class HabitsFragment extends Fragment {
 
 
             fab_habits_txt.startAnimation(FadeClose);
-
-
             fab_habits_txt.setClickable(false);
 
             fab_edit_txt.startAnimation(FadeClose);
@@ -194,14 +184,12 @@ public class HabitsFragment extends Fragment {
             isOpen = false;
         } else {
             habitsbtn.startAnimation(FadeOpen);
-
             habitsbtn.setClickable(true);
 
             habitedtfab.startAnimation(FadeOpen);
             habitedtfab.setClickable(true);
 
             fab_habits_txt.startAnimation(FadeOpen);
-
             fab_habits_txt.setClickable(true);
 
             fab_edit_txt.startAnimation(FadeOpen);
